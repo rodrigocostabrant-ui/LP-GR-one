@@ -53,7 +53,11 @@ ainda vale. Para estrutura de seções e todo o copy em pt-BR, usar o `.dc.html`
 2. Manifesto — "SUA EMPRESA NÃO É COMUM." (seção fixa, 340vh, fragmentação de texto)
 3. Método (`#metodo`) — "Anatomia de uma página que converte": maquete interativa +
    lista de 6 partes (Promessa, Identificação, Método, Objeções, Diferenciais, Chamada)
-4. Processo (`#processo`) — trilho horizontal fixo, 560vh, 5 etapas, marca 3D decorativa
+4. Processo (`#processo`) — seção fixa (600vh): primeiro só título + parágrafo, depois
+   5 cartões de etapa empilhados (entram de baixo; o anterior recua a 0,7 e gira 5°,
+   receita do Skiper 17 StickyCard). Cada cartão tem paleta própria da família
+   prata/azul. Vale em todas as larguras; lista vertical só com movimento reduzido.
+   Marca 3D decorativa atrás dos cartões. (Substituiu o trilho horizontal em 2026-09-26.)
 5. Manifesto tipográfico — duas faixas de texto em marquee + 2 diferenciais
 6. Antes e depois — slider de comparação (Vale Advocacia, fictício e sinalizado)
 7. Investimento — "sob consulta" + como funciona o atendimento (3 passos)
@@ -151,6 +155,14 @@ automática; manter só opacidade em 400ms.
 - [ ] `npm run build` sem erro/warning relevante
 - [ ] WhatsApp com placeholder sinalizado como TODO
 - [ ] Nenhuma menção a métricas/números inventados (o design já evita isso)
+
+## Fluxo de preview local
+
+Sempre que fizer uma alteração no código (visual, copy, animação, etc.), ao terminar:
+1. Rode/confirme o `npm run dev` (se já não estiver rodando).
+2. Verifique que o servidor reflete a mudança mais recente.
+3. Deixe o link `http://localhost:3000` na resposta final, para o usuário conferir
+   a prévia imediatamente — sem que ele precise pedir.
 
 ## Nota sobre AGENTS.md
 

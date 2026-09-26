@@ -32,8 +32,8 @@ export const INTENSITY = 1;
 export const MEDIA = {
   reduced: "(prefers-reduced-motion: reduce)",
   finePointer: "(pointer: fine)",
-  /** Trilho horizontal do Processo (especificação: computador ≥ 1100px). */
-  processTrack: "(min-width: 1100px) and (prefers-reduced-motion: no-preference)",
+  /** Pilha de cartões fixa do Processo (todas as larguras; lista vertical com movimento reduzido). */
+  processStack: "(prefers-reduced-motion: no-preference)",
   /** Layout de celular da especificação (< 760px). */
   mobile: "(max-width: 759px)",
   /** Cápsula de navegação e ímã (protótipo: ≥ 900px). */

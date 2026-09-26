@@ -339,17 +339,273 @@ body::after {
   opacity: 0;
 }
 
-/* ── Processo: trilho horizontal só no computador e com movimento ─────── */
+/* ── Processo: pilha de cartões fixa (lista com movimento reduzido) ─────── */
 
-.proc-track {
+.proc-stack {
   display: none;
 }
-@media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
-  .proc-track {
+@media (prefers-reduced-motion: no-preference) {
+  .proc-stack {
     display: block;
   }
   .proc-list {
     display: none;
+  }
+}
+.proc-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(0deg, rgba(196, 206, 222, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196, 206, 222, 0.045) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 70% 60% at 60% 50%, #000, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 60% 50%, #000, transparent);
+}
+.proc-eyebrows {
+  position: absolute;
+  top: clamp(88px, 13vh, 128px);
+  left: var(--m);
+  right: var(--m);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font: 400 11px/1.4 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  z-index: 2;
+}
+.proc-mark {
+  position: absolute;
+  right: var(--m);
+  top: 50%;
+  width: calc(0.71 * min(170px, 11vw) * 3.2);
+  height: calc(0.71 * min(170px, 11vw) * 2.6);
+  transform: translate(22%, -50%);
+}
+@media (max-width: 759px) {
+  .proc-mark {
+    top: 27%;
+  }
+}
+.proc-head {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 28px;
+  padding: 0 var(--m);
+  transform-origin: 50% 50%;
+  z-index: 1;
+}
+.proc-title {
+  font: 700 clamp(48px, 6vw, 112px) / 0.95 var(--font-sans);
+  font-variation-settings: "wdth" 88;
+  letter-spacing: -0.04em;
+}
+.proc-title-italic {
+  font: italic 400 clamp(54px, 6.8vw, 124px) / 1 var(--font-serif);
+  color: var(--silver);
+}
+.proc-progress {
+  position: absolute;
+  left: var(--m);
+  right: var(--m);
+  bottom: clamp(18px, 3.5vh, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+}
+.proc-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font: 400 10px/1 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* Cartão de etapa: cada um com sua paleta, sempre dentro da família prata/azul. */
+.proc-card {
+  --c-bg: var(--surf);
+  --c-fg: var(--ink);
+  --c-sub: var(--silver);
+  --c-accent: var(--ice);
+  --c-line: color-mix(in srgb, var(--silver) 14%, transparent);
+  --c-box: color-mix(in srgb, var(--blue) 12%, transparent);
+  --c-num: color-mix(in srgb, var(--silver) 30%, transparent);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 4vw;
+  padding: clamp(24px, 4vw, 56px);
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--c-bg);
+  color: var(--c-fg);
+  box-shadow:
+    0 40px 90px -30px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+}
+.proc-card--stacked {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: min(1080px, calc(100vw - 2 * var(--m)));
+  height: min(640px, 72vh);
+  transform: translate3d(-50%, calc(-50% + 105vh), 0);
+  visibility: hidden;
+  will-change: transform;
+  z-index: 3;
+}
+.proc-card--1 {
+  --c-bg: linear-gradient(160deg, var(--surf), var(--bg2));
+  border: 1px solid color-mix(in srgb, var(--silver) 16%, transparent);
+}
+.proc-card--2 {
+  --c-bg: radial-gradient(ellipse 80% 70% at 85% 0%, color-mix(in srgb, var(--blue) 42%, transparent), transparent 65%), var(--deep);
+  --c-sub: color-mix(in srgb, var(--ice) 70%, var(--silver));
+  --c-line: color-mix(in srgb, var(--ice) 20%, transparent);
+  --c-box: color-mix(in srgb, var(--ice) 10%, transparent);
+  --c-num: color-mix(in srgb, var(--ice) 38%, transparent);
+}
+.proc-card--3 {
+  --c-bg: linear-gradient(155deg, var(--ink), var(--silver));
+  --c-fg: var(--bg);
+  --c-sub: color-mix(in srgb, var(--bg) 72%, transparent);
+  --c-accent: var(--deep);
+  --c-line: color-mix(in srgb, var(--bg) 16%, transparent);
+  --c-box: color-mix(in srgb, var(--deep) 9%, transparent);
+  --c-num: color-mix(in srgb, var(--bg) 24%, transparent);
+}
+.proc-card--4 {
+  --c-bg: linear-gradient(140deg, var(--blue), var(--deep) 78%);
+  --c-sub: color-mix(in srgb, var(--ink) 80%, transparent);
+  --c-accent: var(--ink);
+  --c-line: color-mix(in srgb, var(--ink) 22%, transparent);
+  --c-box: color-mix(in srgb, var(--bg) 22%, transparent);
+  --c-num: color-mix(in srgb, var(--ink) 36%, transparent);
+}
+.proc-card--5 {
+  --c-bg: linear-gradient(155deg, var(--ice), var(--ink) 85%);
+  --c-fg: var(--bg);
+  --c-sub: color-mix(in srgb, var(--bg) 72%, transparent);
+  --c-accent: var(--deep);
+  --c-line: color-mix(in srgb, var(--deep) 18%, transparent);
+  --c-box: color-mix(in srgb, var(--deep) 10%, transparent);
+  --c-num: color-mix(in srgb, var(--deep) 30%, transparent);
+}
+.proc-card-num {
+  position: absolute;
+  top: clamp(16px, 3vw, 40px);
+  right: clamp(20px, 3.5vw, 48px);
+  font: 200 clamp(96px, 14vw, 240px) / 0.8 var(--font-sans);
+  font-variation-settings: "wdth" 78;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-num);
+  pointer-events: none;
+}
+.proc-card-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  container-type: inline-size;
+}
+.proc-card-label {
+  font: 400 11px/1 var(--font-mono);
+  letter-spacing: 0.16em;
+  color: var(--c-accent);
+}
+.proc-card-title {
+  margin: 0;
+  font-weight: 700;
+  line-height: 0.95;
+  font-family: var(--font-sans);
+  font-variation-settings: "wdth" 90;
+  letter-spacing: -0.035em;
+}
+.proc-card-desc {
+  margin: 0;
+  max-width: 380px;
+  font: 400 16px/1.6 var(--font-sans);
+  color: var(--c-sub);
+  text-wrap: pretty;
+}
+.proc-card-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.proc-card-kicker {
+  font: 400 10px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-sub);
+}
+.proc-card-kicker--accent {
+  color: var(--c-accent);
+}
+.proc-card-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-top: 1px solid var(--c-line);
+  font: 400 14px/1.3 var(--font-sans);
+}
+.proc-card-plus {
+  color: var(--c-accent);
+}
+.proc-card-receive {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: var(--c-box);
+  border: 1px solid var(--c-line);
+}
+.proc-card-dim {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (max-width: 759px) {
+  .proc-title {
+    font-size: clamp(40px, 11vw, 80px);
+    font-variation-settings: "wdth" 86;
+  }
+  .proc-title-italic {
+    font-size: clamp(46px, 12.5vw, 90px);
+  }
+  .proc-progress-labels {
+    display: none;
+  }
+  .proc-card {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: end;
+    gap: 20px;
+    border-radius: 22px;
+  }
+  .proc-card--stacked {
+    top: 53%;
+    height: min(640px, 76vh);
+  }
+  .proc-card-desc {
+    font-size: 15px;
+  }
+  .proc-card-item {
+    padding: 9px 0;
   }
 }
 
