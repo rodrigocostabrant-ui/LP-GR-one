@@ -7,6 +7,7 @@ import { motion, motionState } from "@/lib/motion/engine";
 import { useTick } from "@/lib/motion/hooks";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { ArrowIcon } from "@/components/ui/WhatsAppBar";
+import { GRLockup } from "@/components/ui/GRLogo";
 
 export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
@@ -74,22 +75,8 @@ export default function Header() {
           padding: "18px var(--m)",
         }}
       >
-        <a href="#inicio" aria-label="GR One — voltar ao início" style={{ display: "flex", alignItems: "center", gap: 11 }}>
-          <span
-            style={{
-              font: "800 23px/1 var(--font-sans)",
-              fontVariationSettings: "'wdth' 112",
-              letterSpacing: "-.05em",
-              background: "linear-gradient(180deg,#FFFFFF 20%,#8E97A6 100%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            GR
-          </span>
-          <span style={{ width: 1, height: 14, background: "rgba(214,222,235,.3)" }} />
-          <span style={{ font: "500 11px/1 var(--font-mono)", letterSpacing: ".3em", color: "var(--silver)" }}>ONE</span>
+        <a href="#inicio" aria-label="GR One — voltar ao início" style={{ display: "flex", alignItems: "center" }}>
+          <GRLockup height={24} />
         </a>
 
         <nav

@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { toCreasedNormals } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { motion, motionState } from "@/lib/motion/engine";
 import glyph from "./gr-glyph.json";
 
@@ -74,7 +75,13 @@ function extrude(polygons: number[][][][]) {
     bevelSegments: 1,
   });
   geo.translate(0, 0, -DEPTH / 2);
-  geo.computeVertexNormals();
+  // Laterais lisas nas curvas e retas do contorno vetorizado (normais chapadas por
+  // segmento "tracejavam" o reflexo); cantos acima de 35° e o chanfro continuam vivos.
+  // A função agrupa vértices numa grade de 0,01 — mais grossa que o chanfro nesta
+  // escala, por isso a ampliação temporária.
+  geo.scale(1000, 1000, 1000);
+  toCreasedNormals(geo, 35 * DEG);
+  geo.scale(0.001, 0.001, 0.001);
   return geo;
 }
 

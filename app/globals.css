@@ -121,18 +121,15 @@ body::after {
   pointer-events: none;
 }
 
+/* Monograma estático (sem WebGL): brilho prata pintado através da máscara da logo. */
 .gr-mark-fallback {
   display: inline-block;
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 800;
-  font-variation-settings: "wdth" 112;
-  line-height: 0.82;
-  letter-spacing: -0.05em;
   background: linear-gradient(100deg, #5b6475 0%, #9aa3b2 22%, #eef2f7 40%, #ffffff 47%, #c4ccd8 54%, #afc4ff 64%, #6b7483 80%, #3e4656 100%);
   background-size: 320% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
   animation: gr-mark-sheen 9s var(--ease-transicao) infinite alternate;
 }
 @keyframes gr-mark-sheen {

@@ -5,6 +5,7 @@ import { motionState } from "@/lib/motion/engine";
 import { useTick } from "@/lib/motion/hooks";
 import type { MarkState } from "./stage";
 import { stageStore } from "./stageStore";
+import { MONOGRAM_ASPECT, MONOGRAM_MASK } from "@/components/ui/GRLogo";
 
 export type { MarkState };
 
@@ -75,9 +76,15 @@ export default function GRMark({
       />
       {status === "fallback" && (
         <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span className="gr-mark-fallback" style={{ fontSize: fallbackFontSize }}>
-            GR
-          </span>
+          <span
+            className="gr-mark-fallback"
+            style={{
+              height: `calc(${fallbackFontSize} * 0.71)`,
+              aspectRatio: MONOGRAM_ASPECT,
+              maskImage: MONOGRAM_MASK,
+              WebkitMaskImage: MONOGRAM_MASK,
+            }}
+          />
         </div>
       )}
     </div>

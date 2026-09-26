@@ -1,73 +1,37 @@
-// Gera components/three/gr-glyph.json: o monograma "GR" (Archivo 800, largura 112,
-// tracking -0,05em) convertido em polígonos e cortado nas 4 fatias da especificação
-// (0–32–50–68–100% da altura). Rodar com `npm run build:glyph` ao trocar fonte ou cortes.
+// Gera, a partir da logo vetorizada (Lp design/logo/gr-one-logo.svg):
+//  - components/three/gr-glyph.json: o monograma "GR" em polígonos, inteiro e cortado
+//    nas 4 fatias da especificação (0–32–50–68–100% da altura), para o objeto 3D;
+//  - components/ui/gr-logo-paths.ts: monograma e nome "GR ONE" como paths SVG (cabeçalho,
+//    versão estática sem WebGL);
+//  - app/icon.svg: ícone da aba.
+// Rodar com `npm run build:glyph` ao trocar a logo ou os cortes.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import * as fontkit from "fontkit";
 import polygonClipping from "polygon-clipping";
+import { bounds, pathToRings, readLogoPaths } from "./logo-geometry.mjs";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const FONT = path.join(root, "scripts/assets/archivo-latin-variable.woff2");
+const LOGO = path.join(root, "Lp design/logo/gr-one-logo.svg");
 const OUT = path.join(root, "components/three/gr-glyph.json");
+const OUT_PATHS = path.join(root, "components/ui/gr-logo-paths.ts");
 const CUTS = [0, 0.32, 0.5, 0.68, 1];
-const TRACKING = -0.05;
-const CURVE_STEPS = 12;
+/**
+ * Altura do monograma em "corpos" (em). Mantém a proporção usada pelo palco 3D
+ * (extrusão 11% e chanfro 1% do corpo, câmera a 4,5 corpos) igual à da versão em Archivo.
+ */
+const CAP_HEIGHT_IN_EM = 0.71;
 
-// `getVariation` do fontkit reabre o stream do woff2 ainda comprimido e falha.
-// Mesmo efeito: aplicar as coordenadas na própria fonte antes do primeiro glifo.
-const font = fontkit.openSync(FONT);
-const AXES = { wght: 800, wdth: 112 };
-font._variationCoords = font.fvar.axis.map((a) => AXES[a.axisTag.trim()] ?? a.defaultValue);
-const glyphs = [..."GR"].map((ch) => font.glyphForCodePoint(ch.codePointAt(0)));
-const run = { glyphs, positions: glyphs.map((g) => ({ xAdvance: g.advanceWidth })) };
+const paths = readLogoPaths(LOGO);
+// 3D mais denso que o 2D; as normais das laterais são suavizadas no palco (stage.ts).
+// Segmento mínimo 1,6px (> chanfro de ~1,2px da imagem de origem).
+const solidRings = pathToRings(paths.monograma, 0.05, 1.6);
+const monoRings = pathToRings(paths.monograma, 0.1);
+const wordRings = pathToRings(paths.nome, 0.1);
 
-function flatten(commands, dx) {
-  const contours = [];
-  let cur = null;
-  let px = 0;
-  let py = 0;
-  const push = (x, y) => {
-    cur.push([x + dx, y]);
-    px = x;
-    py = y;
-  };
-  for (const { command, args } of commands) {
-    if (command === "moveTo") {
-      if (cur && cur.length > 2) contours.push(cur);
-      cur = [];
-      push(args[0], args[1]);
-    } else if (command === "lineTo") {
-      push(args[0], args[1]);
-    } else if (command === "quadraticCurveTo") {
-      const [cx, cy, x, y] = args;
-      const x0 = px;
-      const y0 = py;
-      for (let i = 1; i <= CURVE_STEPS; i++) {
-        const t = i / CURVE_STEPS;
-        const u = 1 - t;
-        push(u * u * x0 + 2 * u * t * cx + t * t * x, u * u * y0 + 2 * u * t * cy + t * t * y);
-      }
-    } else if (command === "bezierCurveTo") {
-      const [c1x, c1y, c2x, c2y, x, y] = args;
-      const x0 = px;
-      const y0 = py;
-      for (let i = 1; i <= CURVE_STEPS; i++) {
-        const t = i / CURVE_STEPS;
-        const u = 1 - t;
-        push(
-          u * u * u * x0 + 3 * u * u * t * c1x + 3 * u * t * t * c2x + t * t * t * x,
-          u * u * u * y0 + 3 * u * u * t * c1y + 3 * u * t * t * c2y + t * t * t * y,
-        );
-      }
-    } else if (command === "closePath") {
-      if (cur && cur.length > 2) contours.push(cur);
-      cur = null;
-    }
-  }
-  if (cur && cur.length > 2) contours.push(cur);
-  return contours;
-}
+// ── Objeto 3D ─────────────────────────────────────────────────────────────
+// Imagem tem y para baixo; o modelo, y para cima.
+const contours = solidRings.map((r) => r.map(([x, y]) => [x, -y]));
 
 function signedArea(ring) {
   let a = 0;
@@ -79,14 +43,7 @@ function signedArea(ring) {
   return a / 2;
 }
 
-// Regra nonzero: fontes variáveis mantêm contornos sobrepostos, então une os
-// externos e subtrai os furos (orientação oposta à do maior contorno).
-let penX = 0;
-const contours = [];
-run.glyphs.forEach((glyph, i) => {
-  contours.push(...flatten(glyph.path.commands, penX));
-  penX += run.positions[i].xAdvance + TRACKING * font.unitsPerEm;
-});
+// Contornos com a orientação do maior são externos; os opostos, furos.
 const outerSign = Math.sign(signedArea(contours.reduce((a, b) => (Math.abs(signedArea(b)) > Math.abs(signedArea(a)) ? b : a))));
 const close = (r) => [...r, r[0]];
 const outers = contours.filter((c) => Math.sign(signedArea(c)) === outerSign).map((c) => [close(c)]);
@@ -94,16 +51,7 @@ const holes = contours.filter((c) => Math.sign(signedArea(c)) !== outerSign).map
 let shape = polygonClipping.union(...outers);
 if (holes.length) shape = polygonClipping.difference(shape, ...holes);
 
-let minX = Infinity;
-let minY = Infinity;
-let maxX = -Infinity;
-let maxY = -Infinity;
-for (const poly of shape) for (const [x, y] of poly[0]) {
-  minX = Math.min(minX, x);
-  maxX = Math.max(maxX, x);
-  minY = Math.min(minY, y);
-  maxY = Math.max(maxY, y);
-}
+const { minX, minY, maxX, maxY } = bounds(shape.map((poly) => poly[0]));
 const H = maxY - minY;
 const cx = (minX + maxX) / 2;
 const cy = (minY + maxY) / 2;
@@ -123,11 +71,49 @@ for (let i = 0; i < CUTS.length - 1; i++) {
   });
 }
 
-// Altura do glifo em "corpos" (em): converte medidas da especificação dadas em
-// relação ao tamanho da fonte (extrusão 11%, chanfro 1%) para a unidade do modelo.
-const capHeightInEm = H / font.unitsPerEm;
 fs.writeFileSync(
   OUT,
-  JSON.stringify({ source: "Archivo wght 800 wdth 112, tracking -0.05em", width: +width.toFixed(5), capHeightInEm: +capHeightInEm.toFixed(5), cuts: CUTS, whole: norm(shape), bands }),
+  JSON.stringify({ source: "Lp design/logo/gr-one-logo.svg (monograma)", width: +width.toFixed(5), capHeightInEm: CAP_HEIGHT_IN_EM, cuts: CUTS, whole: norm(shape), bands }),
 );
-console.log(`gr-glyph.json: width ${width.toFixed(3)} × height 1, capHeight ${capHeightInEm.toFixed(3)}em, ${bands.map((b) => b.polygons.length).join("/")} polígonos por fatia`);
+
+// ── Paths 2D ──────────────────────────────────────────────────────────────
+const d = (rings, ox, oy) =>
+  rings.map((r) => "M" + r.map(([x, y]) => `${+(x - ox).toFixed(1)} ${+(y - oy).toFixed(1)}`).join("L") + "Z").join("");
+const mb = bounds(monoRings);
+const lb = bounds([...monoRings, ...wordRings]);
+const box = (b) => `0 0 ${+(b.maxX - b.minX).toFixed(1)} ${+(b.maxY - b.minY).toFixed(1)}`;
+
+fs.writeFileSync(
+  OUT_PATHS,
+  `// Gerado por scripts/build-gr-glyph.mjs a partir de Lp design/logo/gr-one-logo.svg — não editar.
+
+/** Só o monograma "GR". */
+export const MONOGRAM = { viewBox: "${box(mb)}", d: "${d(monoRings, mb.minX, mb.minY)}" };
+
+/** Monograma + nome "GR ONE", no mesmo alinhamento da logo original. */
+export const LOCKUP = {
+  viewBox: "${box(lb)}",
+  monogram: "${d(monoRings, lb.minX, lb.minY)}",
+  name: "${d(wordRings, lb.minX, lb.minY)}",
+};
+`,
+);
+
+// Ícone da aba: monograma nas cores da logo (azul-marinho sobre creme), quadrado arredondado.
+{
+  const w = mb.maxX - mb.minX;
+  const h = mb.maxY - mb.minY;
+  const s = Math.max(w, h) + h * 0.32;
+  const f = (n) => +n.toFixed(1);
+  fs.writeFileSync(
+    path.join(root, "app/icon.svg"),
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${f(s)} ${f(s)}"><rect width="100%" height="100%" rx="${f(s * 0.22)}" fill="#F0EFE7"/>` +
+      `<path transform="translate(${f((s - w) / 2)} ${f((s - h) / 2)})" fill="#17375A" fill-rule="evenodd" d="${d(monoRings, mb.minX, mb.minY)}"/></svg>`,
+  );
+}
+
+const count = (rs) => rs.reduce((n, r) => n + r.length, 0);
+console.log(
+  `gr-glyph.json: width ${width.toFixed(3)} × height 1, ${bands.map((b) => b.polygons.length).join("/")} polígonos por fatia; ` +
+    `pontos: 3D ${count(solidRings)}, monograma ${count(monoRings)}, nome ${count(wordRings)}; gr-logo-paths.ts ${fs.statSync(OUT_PATHS).size} bytes`,
+);

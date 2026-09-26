@@ -101,9 +101,14 @@ Texto nunca hardcoded em componente — sempre via `content/site.ts`.
   acontece na fase `update`. As fórmulas das seções seguem o script do protótipo v2.
 - **Objeto 3D**: `components/three/stage.ts` — um renderer, um canvas fixo
   (`.gr-stage`, z-index 2), recorte por marca (`<GRMark>` define a caixa). Texto que deve
-  ficar à frente do objeto precisa de `position: relative; z-index: 3`. Geometria real
-  gerada por `npm run build:glyph` (Archivo 800/wdth 112, 4 fatias) em
-  `components/three/gr-glyph.json`. Estúdio de luz gerado em código (sem HDR externo).
+  ficar à frente do objeto precisa de `position: relative; z-index: 3`. Estúdio de luz
+  gerado em código (sem HDR externo).
+- **Logo (desde 2026-09-26)**: a logo oficial da GR está em `Lp design/logo/` (imagem
+  original + `gr-one-logo.svg` vetorizado, fonte da verdade). `npm run build:glyph` gera a
+  partir do SVG: a geometria 3D do monograma (inteira + 4 fatias) em
+  `components/three/gr-glyph.json`, os paths 2D em `components/ui/gr-logo-paths.ts`
+  (cabeçalho via `GRLockup`, versão estática sem WebGL via máscara CSS) e `app/icon.svg`.
+  Trocar a logo = substituir o SVG e rodar o script; não editar os arquivos gerados.
 - **Tokens**: curvas em `lib/motion/tokens.ts` espelham `--ease-entrada`/`--ease-transicao`.
 - **CSS**: estilos de componente em `@layer components`, base de `a` em `@layer base`
   (fora de camada vence os utilitários do Tailwind v4). Sem `scroll-behavior: smooth` —
