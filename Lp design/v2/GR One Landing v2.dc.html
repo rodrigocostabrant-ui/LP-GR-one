@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+html{background:#04060A;scroll-behavior:smooth}
+body{margin:0;background:#04060A;color:#EEF1F5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;z-index:95;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+a{color:#EEF1F5;text-decoration:none}
+a:hover{color:#AFC4FF}
+::selection{background:#3D6DFF;color:#fff}
+*:focus-visible{outline:2px solid #AFC4FF;outline-offset:3px}
+@media (pointer:fine){body.gr-cursor,body.gr-cursor *{cursor:none!important}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" data-screen-label="GR One — Landing" style="--bg:#04060A;--bg2:#080C14;--surf:#0D1320;--ink:#EEF1F5;--silver:#B9C1CE;--mute:#7D8697;--blue:#3D6DFF;--deep:#0A1C4A;--ice:#AFC4FF;--sans:'Archivo',sans-serif;--serif:'Instrument Serif',serif;--mono:'JetBrains Mono',monospace;--m:clamp(20px,4vw,56px);background:#04060A;color:#EEF1F5;font-family:var(--sans);position:relative;overflow-x:clip">
+
+<div ref="{{ curRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#EEF1F5;z-index:120;pointer-events:none;mix-blend-mode:difference;opacity:0;transition:opacity .3s"></div>
+<div ref="{{ ringRef }}" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:119;pointer-events:none;opacity:0;transition:opacity .3s;mix-blend-mode:difference">
+  <div ref="{{ ringInRef }}" style="width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;border:1px solid rgba(238,241,245,.45);display:flex;align-items:center;justify-content:center;transition:width .45s cubic-bezier(.16,1,.3,1),height .45s cubic-bezier(.16,1,.3,1),margin .45s cubic-bezier(.16,1,.3,1),background .35s,border-color .35s"><span ref="{{ ringLblRef }}" style="font:500 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#04060A;opacity:0;transition:opacity .25s"></span></div>
+</div>
+
+<header ref="{{ headerRef }}" style="position:fixed;top:0;left:0;right:0;z-index:70;border-bottom:1px solid transparent;transition:background .5s,border-color .5s">
+  <div style="max-width:1680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px var(--m)">
+    <a href="#inicio" aria-label="GR One — voltar ao início" style="display:flex;align-items:center;gap:11px">
+      <span style="font:800 23px/1 var(--sans);font-variation-settings:'wdth' 112;letter-spacing:-.05em;background:linear-gradient(180deg,#FFFFFF 20%,#8E97A6 100%);-webkit-background-clip:text;background-clip:text;color:transparent">GR</span>
+      <span style="width:1px;height:14px;background:rgba(214,222,235,.3)"></span>
+      <span style="font:500 11px/1 var(--mono);letter-spacing:.3em;color:#B9C1CE">ONE</span>
+    </a>
+    <sc-if value="{{ desk }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Principal" style="display:flex;gap:4px;padding:5px;border:1px solid rgba(214,222,235,.12);border-radius:999px;background:rgba(13,19,32,.4);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
+        <a href="#inicio" style="padding:9px 18px;border-radius:999px;font:500 13px/1 var(--sans);color:{{ nv0.c }};background:{{ nv0.bg }};transition:color .4s,background .4s">Início</a>
+        <a href="#metodo" style="padding:9px 18px;border-radius:999px;font:500 13px/1 var(--sans);color:{{ nv1.c }};background:{{ nv1.bg }};transition:color .4s,background .4s">Método</a>
+        <a href="#processo" style="padding:9px 18px;border-radius:999px;font:500 13px/1 var(--sans);color:{{ nv2.c }};background:{{ nv2.bg }};transition:color .4s,background .4s">Processo</a>
+        <a href="#contato" style="padding:9px 18px;border-radius:999px;font:500 13px/1 var(--sans);color:{{ nv3.c }};background:{{ nv3.bg }};transition:color .4s,background .4s">Contato</a>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ desk }}" hint-placeholder-val="{{ true }}">
+      <a href="{{ wa }}" target="_blank" rel="noopener" data-magnetic="" data-cursor="Conversar" style="display:inline-flex;align-items:center;gap:12px;height:42px;padding:0 8px 0 20px;border-radius:999px;border:1px solid rgba(214,222,235,.28);font:500 13px/1 var(--sans);color:#EEF1F5;background:linear-gradient(#EEF1F5,#EEF1F5) no-repeat left center / 0% 100%;transition:background-size .6s cubic-bezier(.77,0,.18,1),color .4s,border-color .4s,transform .2s" style-hover="background-size:100% 100%;color:#04060A;border-color:#EEF1F5" style-active="transform:scale(.97)">Começar uma conversa<span style="width:28px;height:28px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></a>
+    </sc-if>
+    <sc-if value="{{ notDesk }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-expanded="{{ menu }}" style="display:flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(214,222,235,.28);background:rgba(13,19,32,.5);color:#EEF1F5;font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase">{{ menuLabel }}<span style="display:flex;flex-direction:column;gap:4px"><span style="width:16px;height:1px;background:#EEF1F5"></span><span style="width:10px;height:1px;background:#EEF1F5"></span></span></button>
+    </sc-if>
+  </div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:65;background:radial-gradient(ellipse 80% 50% at 80% 10%,rgba(61,109,255,.25),transparent 70%),#04060A;display:flex;flex-direction:column;justify-content:space-between;padding:110px var(--m) 32px">
+    <nav aria-label="Menu" style="display:flex;flex-direction:column;gap:6px">
+      <a href="#inicio" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:14px;font:700 44px/1.1 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.03em"><span style="font:400 11px var(--mono);color:#7D8697">01</span>Início</a>
+      <a href="#metodo" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:14px;font:700 44px/1.1 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.03em"><span style="font:400 11px var(--mono);color:#7D8697">02</span>Método</a>
+      <a href="#processo" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:14px;font:700 44px/1.1 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.03em"><span style="font:400 11px var(--mono);color:#7D8697">03</span>Processo</a>
+      <a href="#contato" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:14px;font:700 44px/1.1 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.03em"><span style="font:400 11px var(--mono);color:#7D8697">04</span>Contato</a>
+    </nav>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <a href="{{ wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 10px 0 24px;border-radius:999px;background:#EEF1F5;color:#04060A;font:600 15px/1 var(--sans)">Começar uma conversa no WhatsApp<span style="width:38px;height:38px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></a>
+      <span style="font:400 11px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7D8697">GR One — estúdio de landing pages</span>
+    </div>
+  </div>
+</sc-if>
+
+<section id="inicio" ref="{{ heroRef }}" data-screen-label="01 Hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:130px var(--m) clamp(28px,5vh,52px);overflow:hidden;background:radial-gradient(ellipse 55% 60% at 74% 40%,rgba(61,109,255,.22),transparent 70%),radial-gradient(ellipse 45% 35% at 8% 105%,rgba(175,196,255,.08),transparent 70%),#04060A">
+  <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(196,206,222,.055) 1px,transparent 1px);background-size:calc(100% / 6) 100%;-webkit-mask-image:linear-gradient(180deg,transparent,#000 25%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 25%,#000 70%,transparent);pointer-events:none"></div>
+  <div aria-hidden="true" style="position:absolute;top:-30%;right:16%;width:26vw;height:130%;background:linear-gradient(180deg,rgba(175,196,255,.12),transparent 65%);transform:rotate(20deg);filter:blur(50px);pointer-events:none"></div>
+  <div style="position:absolute;top:clamp(88px,13vh,128px);left:var(--m);right:var(--m);display:flex;justify-content:space-between;gap:16px;font:400 11px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697;z-index:2">
+    <span data-rv="fade">(01) Estúdio de landing pages</span>
+    <span data-rv="fade" data-d="150">Brasil — MMXXVI</span>
+  </div>
+  <div style="position:absolute;left:{{ hmL }};top:{{ hmT }};transform:translate(-50%,-50%);z-index:1">
+    <div aria-hidden="true" style="position:absolute;left:50%;top:50%;width:140%;height:140%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(61,109,255,.28),transparent);filter:blur(20px);pointer-events:none"></div>
+    {{ heroMark }}
+  </div>
+  <h1 style="position:relative;z-index:3;margin:0;display:flex;flex-direction:column;font-weight:400;max-width:1600px">
+    <span style="display:block;overflow:hidden"><span data-rv="mask" style="display:block;font:300 clamp(22px,3vw,50px)/1.15 var(--sans);letter-spacing:-.01em;color:#B9C1CE">A landing page que</span></span>
+    <span style="display:block;overflow:hidden;padding:.02em 0 .06em"><span data-rv="mask" data-d="110" style="display:block"><span ref="{{ heroWordRef }}" style="display:block;font:800 clamp(46px,10.2vw,206px)/.9 var(--sans);font-variation-settings:'wdth' 100;letter-spacing:-.045em;white-space:nowrap;background:linear-gradient(180deg,#FFFFFF 12%,#CDD4DE 52%,#6F7888 100%);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform">TRANSFORMA</span></span></span>
+    <span style="display:block;overflow:hidden"><span data-rv="mask" data-d="220" style="display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.25em"><em style="font:italic 400 clamp(42px,7.4vw,140px)/1 var(--serif);color:#EEF1F5;letter-spacing:-.01em">visitante</em><span style="font:300 clamp(30px,5vw,92px)/1 var(--sans);letter-spacing:-.03em;color:#B9C1CE">em cliente.</span></span></span>
+  </h1>
+  <div style="position:relative;z-index:3;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px 40px;margin-top:clamp(28px,5vh,56px)">
+    <p data-rv="up" data-d="350" style="margin:0;max-width:440px;font:400 16px/1.6 var(--sans);color:#B9C1CE;text-wrap:pretty">Landing pages de alto padrão para empresas de serviço que não podem parecer comuns. Estratégia, texto e design com um único objetivo: <span style="color:#EEF1F5">começar a conversa.</span></p>
+    <div data-rv="up" data-d="450" style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
+      <a href="{{ wa }}" target="_blank" rel="noopener" data-magnetic="" data-cursor="Conversar" style="display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 10px 0 26px;border-radius:999px;border:1px solid rgba(214,222,235,.35);font:500 15px/1 var(--sans);color:#EEF1F5;background:linear-gradient(#EEF1F5,#EEF1F5) no-repeat left center / 0% 100%,linear-gradient(135deg,rgba(61,109,255,.35),rgba(255,255,255,.03));transition:background-size .65s cubic-bezier(.77,0,.18,1),color .4s,border-color .4s,transform .2s" style-hover="background-size:100% 100%,100% 100%;color:#04060A;border-color:#EEF1F5" style-active="transform:scale(.97)">Começar uma conversa<span style="width:36px;height:36px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></a>
+      <a href="#metodo" style="display:inline-flex;align-items:center;gap:10px;font:500 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#B9C1CE;padding:10px 0;border-bottom:1px solid rgba(214,222,235,.25);transition:color .3s,border-color .3s" style-hover="color:#EEF1F5;border-color:#EEF1F5">Ver o método<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1V9M5 9L1.5 5.5M5 9L8.5 5.5" stroke="currentColor" stroke-width="1.2"></path></svg></a>
+    </div>
+    <sc-if value="{{ desk }}" hint-placeholder-val="{{ true }}">
+      <div data-rv="fade" data-d="700" style="display:flex;align-items:center;gap:14px;font:400 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#7D8697"><span style="position:relative;width:1px;height:52px;background:rgba(214,222,235,.15);overflow:hidden"><span ref="{{ scrollDotRef }}" style="position:absolute;left:0;top:0;width:1px;height:18px;background:#AFC4FF"></span></span>Role para entrar</div>
+    </sc-if>
+  </div>
+</section>
+
+<section ref="{{ s3Ref }}" data-screen-label="02 Manifesto — não faça o comum" style="position:relative;height:340vh;background:#04060A">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 55%,rgba(61,109,255,.12),transparent 70%)"></div>
+    <span style="position:absolute;top:clamp(88px,13vh,128px);left:var(--m);font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">(02) Manifesto</span>
+    <div style="position:relative;width:100%;display:flex;flex-direction:column;align-items:center;gap:1vh;text-align:center">
+      <div style="display:flex;gap:.3em;justify-content:center;flex-wrap:nowrap;font-size:clamp(28px,6.4vw,120px);white-space:nowrap">
+        <span data-w="a" style="display:block;font:200 1em/1 var(--sans);font-variation-settings:'wdth' 118;letter-spacing:-.03em;color:#B9C1CE;will-change:transform">SUA EMPRESA</span>
+        <span data-w="b" style="display:block;font:800 1em/1 var(--sans);font-variation-settings:'wdth' 118;letter-spacing:-.03em;color:#EEF1F5;will-change:transform">NÃO É</span>
+      </div>
+      <div aria-label="COMUM." style="display:flex;justify-content:center;font:900 clamp(92px,19.5vw,380px)/.84 var(--sans);font-variation-settings:'wdth' 100;letter-spacing:-.05em">
+        <span data-ch="" aria-hidden="true" style="display:block;background:linear-gradient(180deg,#FFFFFF 15%,#AEB6C4 60%,#59626F 100%);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform">C</span>
+        <span data-ch="" aria-hidden="true" style="display:block;background:linear-gradient(180deg,#FFFFFF 15%,#AEB6C4 60%,#59626F 100%);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform">O</span>
+        <span data-ch="" aria-hidden="true" style="display:block;background:linear-gradient(180deg,#FFFFFF 15%,#AEB6C4 60%,#59626F 100%);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform">M</span>
+        <span data-ch="" aria-hidden="true" style="display:block;background:linear-gradient(180deg,#FFFFFF 15%,#AEB6C4 60%,#59626F 100%);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform">U</span>
+        <span data-ch="" aria-hidden="true" style="display:block;background:linear-gradient(180deg,#FFFFFF 15%,#AEB6C4 60%,#59626F 100%);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform">M</span>
+        <span data-ch="" aria-hidden="true" style="display:block;color:#3D6DFF;will-change:transform">.</span>
+      </div>
+    </div>
+    <div data-w="q" style="position:absolute;top:18vh;left:var(--m);right:var(--m);text-align:center;opacity:0">
+      <span style="font:italic 400 clamp(34px,5.4vw,96px)/1 var(--serif);color:#EEF1F5">Então por que a sua página seria?</span>
+    </div>
+    <div aria-hidden="true" style="position:absolute;left:50%;top:58%;width:min(1100px,88vw);height:min(52vh,560px);transform:translate(-50%,-50%)">
+      <div data-wf="0" style="position:absolute;inset:0;border:1px solid rgba(214,222,235,.28);border-radius:12px;opacity:0"></div>
+      <div data-wf="1" data-wft="x" style="position:absolute;left:0;right:0;top:12%;height:1px;background:rgba(214,222,235,.22);transform-origin:left;opacity:0"></div>
+      <div data-wf="2" data-wft="x" style="position:absolute;left:4%;top:5%;width:8%;height:2.2%;background:linear-gradient(90deg,#fff,#8E97A6);border-radius:2px;transform-origin:left;opacity:0"></div>
+      <div data-wf="3" data-wft="x" style="position:absolute;right:4%;top:4.2%;width:11%;height:3.6%;border:1px solid #3D6DFF;border-radius:99px;transform-origin:right;opacity:0"></div>
+      <div data-wf="4" data-wft="x" style="position:absolute;left:5%;top:26%;width:40%;height:9%;background:linear-gradient(90deg,rgba(238,241,245,.9),rgba(238,241,245,.35));border-radius:2px;transform-origin:left;opacity:0"></div>
+      <div data-wf="5" data-wft="x" style="position:absolute;left:5%;top:38%;width:28%;height:9%;background:linear-gradient(90deg,rgba(185,193,206,.7),rgba(185,193,206,.2));border-radius:2px;transform-origin:left;opacity:0"></div>
+      <div data-wf="6" data-wft="x" style="position:absolute;left:5%;top:54%;width:30%;height:1.4%;background:rgba(214,222,235,.3);transform-origin:left;opacity:0"></div>
+      <div data-wf="7" data-wft="x" style="position:absolute;left:5%;top:59%;width:24%;height:1.4%;background:rgba(214,222,235,.3);transform-origin:left;opacity:0"></div>
+      <div data-wf="8" data-wft="x" style="position:absolute;left:5%;top:70%;width:15%;height:8%;background:#3D6DFF;border-radius:99px;transform-origin:left;opacity:0"></div>
+      <div data-wf="9" style="position:absolute;left:54%;top:22%;width:41%;height:66%;border-radius:6px;background:linear-gradient(145deg,rgba(61,109,255,.35),rgba(10,28,74,.4) 50%,rgba(175,196,255,.12));border:1px solid rgba(175,196,255,.25);opacity:0"></div>
+    </div>
+  </div>
+</section>
+
+<section id="metodo" ref="{{ anatRef }}" data-screen-label="03 Anatomia de uma página" style="position:relative;margin:0 clamp(8px,1.2vw,16px);border-radius:clamp(20px,2.4vw,32px);color:#0B1220;overflow:hidden;padding:clamp(90px,13vh,170px) var(--m);background:radial-gradient(ellipse 55% 45% at 90% 0%,rgba(61,109,255,.12),transparent 70%),linear-gradient(180deg,#F4F5F7,#E8EBEF)">
+  <div style="max-width:1560px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(48px,8vh,96px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <span data-rv="fade" style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#6B7487">(03) Método</span>
+        <h2 style="margin:0;display:flex;flex-direction:column">
+          <span style="overflow:hidden"><span data-rv="mask" style="display:block;font:700 clamp(40px,6vw,108px)/.95 var(--sans);font-variation-settings:'wdth' 92;letter-spacing:-.04em;color:#0B1220">Anatomia de uma página</span></span>
+          <span style="overflow:hidden"><span data-rv="mask" data-d="100" style="display:block;font:italic 400 clamp(44px,6.6vw,118px)/1 var(--serif);color:#4A5468">que converte.</span></span>
+        </h2>
+      </div>
+      <p data-rv="up" style="margin:0;max-width:340px;font:400 15px/1.6 var(--sans);color:#4A5468;text-wrap:pretty">Nada está na página por acaso. Cada bloco cumpre uma função no caminho entre <span style="color:#0B1220">a primeira visita e a conversa.</span></p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,110px);align-items:center">
+      <div onMouseEnter="{{ anatEnter }}" onMouseLeave="{{ anatLeave }}" data-rv="up" style="flex:1 1 340px;max-width:560px">
+        <div style="border-radius:18px;background:#FFFFFF;box-shadow:0 50px 90px -40px rgba(11,18,32,.35),0 0 0 1px rgba(11,18,32,.06);padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:6px;padding:2px 2px 4px"><span style="width:7px;height:7px;border-radius:50%;background:#D5DAE2"></span><span style="width:7px;height:7px;border-radius:50%;background:#D5DAE2"></span><span style="width:7px;height:7px;border-radius:50%;background:#D5DAE2"></span></div>
+          <div style="position:relative;border-radius:10px;border:1px solid {{ a0.bd }};background:{{ a0.bg }};opacity:{{ a0.op }};transition:border-color .45s,background .45s,opacity .45s;padding:22px 18px;display:flex;flex-direction:column;gap:9px"><span style="display:block;width:72%;height:14px;border-radius:3px;background:{{ a0.bar }};transition:background .45s;"></span><span style="display:block;width:48%;height:14px;border-radius:3px;background:{{ a0.bar }};transition:background .45s;"></span><span style="display:block;width:58%;height:5px;border-radius:3px;background:{{ a0.bar }};transition:background .45s;margin-top:6px"></span><span style="display:block;width:96px;height:24px;border-radius:99px;margin-top:8px;background:#0B1220"></span><span style="position:absolute;top:-10px;right:-10px;width:26px;height:26px;border-radius:50%;background:{{ a0.bc }};color:#fff;font:500 10px/1 var(--mono);display:flex;align-items:center;justify-content:center;transform:{{ a0.bs }};transition:transform .5s cubic-bezier(.16,1,.3,1),background .4s">01</span></div>
+          <div style="position:relative;border-radius:10px;border:1px solid {{ a1.bd }};background:{{ a1.bg }};opacity:{{ a1.op }};transition:border-color .45s,background .45s,opacity .45s;padding:16px 18px"><span style="font:italic 400 17px/1.3 var(--serif);color:#0B1220">“Tenho um site, mas ninguém me chama.”</span><span style="position:absolute;top:-10px;right:-10px;width:26px;height:26px;border-radius:50%;background:{{ a1.bc }};color:#fff;font:500 10px/1 var(--mono);display:flex;align-items:center;justify-content:center;transform:{{ a1.bs }};transition:transform .5s cubic-bezier(.16,1,.3,1),background .4s">02</span></div>
+          <div style="position:relative;border-radius:10px;border:1px solid {{ a2.bd }};background:{{ a2.bg }};opacity:{{ a2.op }};transition:border-color .45s,background .45s,opacity .45s;padding:16px 18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px"><span style="display:flex;flex-direction:column;gap:6px"><span style="width:14px;height:14px;border-radius:50%;border:1px solid {{ a2.bar }}"></span><span style="display:block;width:90%;height:5px;border-radius:3px;background:{{ a2.bar }};transition:background .45s;"></span><span style="display:block;width:60%;height:5px;border-radius:3px;background:{{ a2.bar }};transition:background .45s;"></span></span><span style="display:flex;flex-direction:column;gap:6px"><span style="width:14px;height:14px;border-radius:50%;border:1px solid {{ a2.bar }}"></span><span style="display:block;width:90%;height:5px;border-radius:3px;background:{{ a2.bar }};transition:background .45s;"></span><span style="display:block;width:60%;height:5px;border-radius:3px;background:{{ a2.bar }};transition:background .45s;"></span></span><span style="display:flex;flex-direction:column;gap:6px"><span style="width:14px;height:14px;border-radius:50%;border:1px solid {{ a2.bar }}"></span><span style="display:block;width:90%;height:5px;border-radius:3px;background:{{ a2.bar }};transition:background .45s;"></span><span style="display:block;width:60%;height:5px;border-radius:3px;background:{{ a2.bar }};transition:background .45s;"></span></span><span style="position:absolute;top:-10px;right:-10px;width:26px;height:26px;border-radius:50%;background:{{ a2.bc }};color:#fff;font:500 10px/1 var(--mono);display:flex;align-items:center;justify-content:center;transform:{{ a2.bs }};transition:transform .5s cubic-bezier(.16,1,.3,1),background .4s">03</span></div>
+          <div style="position:relative;border-radius:10px;border:1px solid {{ a3.bd }};background:{{ a3.bg }};opacity:{{ a3.op }};transition:border-color .45s,background .45s,opacity .45s;padding:8px 18px;display:flex;flex-direction:column"><span style="display:flex;justify-content:space-between;align-items:center;padding:8px 0"><span style="display:block;width:55%;height:5px;border-radius:3px;background:{{ a3.bar }};transition:background .45s;"></span><span style="font:400 13px/1 var(--mono);color:#6B7487">+</span></span><span style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid rgba(11,18,32,.08)"><span style="display:block;width:42%;height:5px;border-radius:3px;background:{{ a3.bar }};transition:background .45s;"></span><span style="font:400 13px/1 var(--mono);color:#6B7487">+</span></span><span style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid rgba(11,18,32,.08)"><span style="display:block;width:62%;height:5px;border-radius:3px;background:{{ a3.bar }};transition:background .45s;"></span><span style="font:400 13px/1 var(--mono);color:#6B7487">+</span></span><span style="position:absolute;top:-10px;right:-10px;width:26px;height:26px;border-radius:50%;background:{{ a3.bc }};color:#fff;font:500 10px/1 var(--mono);display:flex;align-items:center;justify-content:center;transform:{{ a3.bs }};transition:transform .5s cubic-bezier(.16,1,.3,1),background .4s">04</span></div>
+          <div style="position:relative;border-radius:10px;border:1px solid {{ a4.bd }};background:{{ a4.bg }};opacity:{{ a4.op }};transition:border-color .45s,background .45s,opacity .45s;padding:16px 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px"><span style="display:flex;flex-direction:column;gap:6px"><span style="display:block;width:70%;height:9px;border-radius:3px;background:{{ a4.bar }};transition:background .45s;"></span><span style="display:block;width:95%;height:5px;border-radius:3px;background:{{ a4.bar }};transition:background .45s;"></span><span style="display:block;width:80%;height:5px;border-radius:3px;background:{{ a4.bar }};transition:background .45s;"></span></span><span style="display:flex;flex-direction:column;gap:6px"><span style="display:block;width:60%;height:9px;border-radius:3px;background:{{ a4.bar }};transition:background .45s;"></span><span style="display:block;width:95%;height:5px;border-radius:3px;background:{{ a4.bar }};transition:background .45s;"></span><span style="display:block;width:70%;height:5px;border-radius:3px;background:{{ a4.bar }};transition:background .45s;"></span></span><span style="position:absolute;top:-10px;right:-10px;width:26px;height:26px;border-radius:50%;background:{{ a4.bc }};color:#fff;font:500 10px/1 var(--mono);display:flex;align-items:center;justify-content:center;transform:{{ a4.bs }};transition:transform .5s cubic-bezier(.16,1,.3,1),background .4s">05</span></div>
+          <div style="position:relative;border-radius:10px;border:1px solid {{ a5.bd }};background:{{ a5.bg }};opacity:{{ a5.op }};transition:border-color .45s,background .45s,opacity .45s;padding:18px;background:#0B1220;display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="display:flex;flex-direction:column;gap:7px;flex:1"><span style="display:block;width:70%;height:10px;border-radius:3px;background:rgba(238,241,245,.8)"></span><span style="display:block;width:45%;height:5px;border-radius:3px;background:rgba(238,241,245,.35)"></span></span><span style="display:block;width:90px;height:26px;border-radius:99px;background:#3D6DFF"></span><span style="position:absolute;top:-10px;right:-10px;width:26px;height:26px;border-radius:50%;background:{{ a5.bc }};color:#fff;font:500 10px/1 var(--mono);display:flex;align-items:center;justify-content:center;transform:{{ a5.bs }};transition:transform .5s cubic-bezier(.16,1,.3,1),background .4s">06</span></div>
+        </div>
+      </div>
+      <div style="flex:1 1 380px;display:flex;flex-direction:column">
+        <sc-for list="{{ anatParts }}" as="p" hint-placeholder-count="6">
+          <button onMouseEnter="{{ p.go }}" onFocus="{{ p.go }}" onClick="{{ p.go }}" data-cursor="Ver" style="display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:baseline;text-align:left;padding:20px 0;border:0;border-top:1px solid rgba(11,18,32,.1);background:none;color:#0B1220;opacity:{{ p.op }};transition:opacity .4s">
+            <span style="font:400 11px/1 var(--mono);letter-spacing:.1em;color:{{ p.nc }}">{{ p.n }}</span>
+            <span style="display:flex;flex-direction:column;gap:8px"><span style="font:600 clamp(19px,1.7vw,26px)/1.15 var(--sans);letter-spacing:-.015em">{{ p.t }}</span><span style="font:400 15px/1.55 var(--sans);color:#4A5468;max-height:{{ p.dh }};overflow:hidden;transition:max-height .55s cubic-bezier(.16,1,.3,1)">{{ p.d }}</span></span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ desk }}" hint-placeholder-val="{{ true }}">
+<section id="processo" ref="{{ procRef }}" data-screen-label="04 Processo" style="position:relative;height:560vh;background:#04060A">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center">
+    <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(0deg,rgba(196,206,222,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(196,206,222,.045) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 60% 50%,#000,transparent);mask-image:radial-gradient(ellipse 70% 60% at 60% 50%,#000,transparent)"></div>
+    <div style="position:absolute;top:clamp(88px,13vh,128px);left:var(--m);right:var(--m);display:flex;justify-content:space-between;font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697;z-index:2"><span>(04) Processo</span><span>Do entendimento à entrega</span></div>
+    <div aria-hidden="true" style="position:absolute;right:var(--m);top:15vh;z-index:3">{{ procMark }}</div>
+    <div ref="{{ trackRef }}" style="position:relative;display:flex;align-items:center;will-change:transform;padding-left:var(--m)">
+      <div style="flex:none;width:min(46vw,760px);padding-right:6vw;display:flex;flex-direction:column;gap:28px">
+        <h2 style="margin:0;display:flex;flex-direction:column">
+          <span style="font:700 clamp(48px,6vw,112px)/.95 var(--sans);font-variation-settings:'wdth' 88;letter-spacing:-.04em">Como uma página</span>
+          <span style="font:italic 400 clamp(54px,6.8vw,124px)/1 var(--serif);color:#B9C1CE">nasce aqui.</span>
+        </h2>
+        <p style="margin:0;max-width:420px;font:400 17px/1.6 var(--sans);color:#B9C1CE;text-wrap:pretty">Não começamos montando blocos. Começamos entendendo por que alguém escolheria a sua empresa — e desenhamos a página a partir disso.</p>
+        <span style="display:flex;align-items:center;gap:12px;font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">Continue rolando<svg width="22" height="10" viewBox="0 0 22 10" fill="none"><path d="M0 5H20M20 5L16 1M20 5L16 9" stroke="currentColor" stroke-width="1.1"></path></svg></span>
+      </div>
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <article style="flex:none;position:relative;width:min(64vw,1040px);height:min(64vh,640px);padding:0 5vw;border-left:1px solid rgba(214,222,235,.1);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:4vw;align-items:end">
+          <span aria-hidden="true" style="position:absolute;top:-2vh;left:4.4vw;font:200 clamp(150px,17vw,300px)/.8 var(--sans);font-variation-settings:'wdth' 78;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(214,222,235,.3)">{{ s.n }}</span>
+          <div style="display:flex;flex-direction:column;gap:22px;padding-bottom:8vh">
+            <span style="font:400 11px/1 var(--mono);letter-spacing:.16em;color:#AFC4FF">ETAPA {{ s.n }} / 05</span>
+            <h3 style="margin:0;font:700 clamp(40px,4.4vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.035em">{{ s.t }}</h3>
+            <p style="margin:0;max-width:380px;font:400 16px/1.6 var(--sans);color:#B9C1CE;text-wrap:pretty">{{ s.d }}</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:18px;padding-bottom:8vh">
+            <span style="font:400 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#7D8697">Nesta etapa</span>
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ s.items }}" as="it" hint-placeholder-count="3"><span style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(214,222,235,.1);font:400 14px/1.3 var(--sans);color:#D6DCE5">{{ it }}<span style="color:#3D6DFF">+</span></span></sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;padding:16px 18px;border-radius:10px;background:linear-gradient(135deg,rgba(61,109,255,.14),rgba(255,255,255,.02));border:1px solid rgba(175,196,255,.16)">
+              <span style="font:400 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#AFC4FF">Você recebe</span>
+              <span style="font:500 15px/1.4 var(--sans)">{{ s.out }}</span>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+      <div style="flex:none;width:18vw"></div>
+    </div>
+    <div style="position:absolute;left:var(--m);right:var(--m);bottom:clamp(28px,5vh,48px);display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;font:400 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697"><span>01 Estratégia</span><span>02 Direção visual</span><span>03 Criação</span><span>04 Desenvolvimento</span><span>05 Entrega</span></div>
+      <div style="position:relative;height:1px;background:rgba(214,222,235,.12)"><div ref="{{ procFillRef }}" style="position:absolute;inset:0;background:linear-gradient(90deg,#3D6DFF,#AFC4FF);transform-origin:left;transform:scaleX(0)"></div></div>
+    </div>
+  </div>
+</section>
+</sc-if>
+<sc-if value="{{ notDesk }}" hint-placeholder-val="{{ false }}">
+<section id="processo" data-screen-label="04 Processo (mobile)" style="position:relative;padding:clamp(100px,14vh,160px) var(--m) 60px;background:#04060A">
+  <span style="display:block;margin-bottom:22px;font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">(04) Processo</span>
+  <h2 style="margin:0 0 20px;display:flex;flex-direction:column">
+    <span data-rv="mask" style="font:700 clamp(40px,11vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 86;letter-spacing:-.04em">Como uma página</span>
+    <span data-rv="mask" style="font:italic 400 clamp(46px,12.5vw,90px)/1 var(--serif);color:#B9C1CE">nasce aqui.</span>
+  </h2>
+  <p style="margin:0 0 56px;max-width:440px;font:400 16px/1.6 var(--sans);color:#B9C1CE">Não começamos montando blocos. Começamos entendendo por que alguém escolheria a sua empresa.</p>
+  <div style="display:flex;flex-direction:column;gap:64px">
+    <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+      <article data-rv="up" style="position:relative;display:flex;flex-direction:column;gap:14px;padding-top:24px;border-top:1px solid rgba(214,222,235,.12)">
+        <span aria-hidden="true" style="font:200 110px/.8 var(--sans);font-variation-settings:'wdth' 78;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(214,222,235,.32)">{{ s.n }}</span>
+        <h3 style="margin:6px 0 0;font:700 36px/1 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.03em">{{ s.t }}</h3>
+        <p style="margin:0;font:400 15px/1.6 var(--sans);color:#B9C1CE">{{ s.d }}</p>
+        <div style="display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:10px;background:linear-gradient(135deg,rgba(61,109,255,.14),rgba(255,255,255,.02));border:1px solid rgba(175,196,255,.16)"><span style="font:400 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#AFC4FF">Você recebe</span><span style="font:500 15px/1.4 var(--sans)">{{ s.out }}</span></div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<section ref="{{ manRef }}" data-screen-label="05 Se você já tem um site" style="position:relative;margin:0 clamp(8px,1.2vw,16px);border-radius:clamp(20px,2.4vw,32px);color:#0B1220;overflow:hidden;padding:clamp(80px,12vh,150px) 0 clamp(100px,14vh,180px);background:linear-gradient(180deg,#EEF0F3,#F6F7F9)">
+  <div style="display:flex;flex-direction:column;gap:1vh">
+    <div style="white-space:nowrap"><div ref="{{ mq1Ref }}" style="display:inline-flex;align-items:center;gap:.5em;font:800 clamp(56px,9vw,168px)/1.02 var(--sans);font-variation-settings:'wdth' 118;letter-spacing:-.045em;color:#0B1220;will-change:transform">ESTRATÉGIA<em style="font:italic 400 1em var(--serif);color:#3D6DFF">·</em>TEXTO QUE CONDUZ<em style="font:italic 400 1em var(--serif);color:#3D6DFF">·</em>DIREÇÃO DE ARTE<em style="font:italic 400 1em var(--serif);color:#3D6DFF">·</em>ESTRATÉGIA<em style="font:italic 400 1em var(--serif);color:#3D6DFF">·</em>TEXTO QUE CONDUZ<em style="font:italic 400 1em var(--serif);color:#3D6DFF">·</em>DIREÇÃO DE ARTE</div></div>
+    <div style="white-space:nowrap"><div ref="{{ mq2Ref }}" style="display:inline-flex;align-items:center;gap:.5em;font:800 clamp(56px,9vw,168px)/1.02 var(--sans);font-variation-settings:'wdth' 118;letter-spacing:-.045em;color:transparent;-webkit-text-stroke:1px rgba(11,18,32,.35);will-change:transform">ATENDIMENTO PERSONALIZADO<em style="font:italic 400 1em var(--serif);color:#3D6DFF;-webkit-text-stroke:0">—</em>REUNIÕES POR VÍDEO<em style="font:italic 400 1em var(--serif);color:#3D6DFF;-webkit-text-stroke:0">—</em>ATENDIMENTO PERSONALIZADO<em style="font:italic 400 1em var(--serif);color:#3D6DFF;-webkit-text-stroke:0">—</em>REUNIÕES POR VÍDEO</div></div>
+  </div>
+  <div style="max-width:1560px;margin:clamp(90px,14vh,180px) auto 0;padding:0 var(--m);display:flex;flex-direction:column;gap:clamp(64px,10vh,120px)">
+    <div style="display:flex;flex-direction:column;gap:28px;max-width:1180px">
+      <span data-rv="fade" style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#6B7487">(05) Se você já tem um site</span>
+      <p data-rv="up" style="margin:0;font:300 clamp(34px,4.8vw,84px)/1.04 var(--sans);letter-spacing:-.03em;color:#4A5468;text-wrap:balance">Ter um site não é o mesmo que ter uma página que <em style="font:italic 400 1.08em var(--serif);color:#0B1220;letter-spacing:-.01em">converte.</em></p>
+      <p data-rv="up" data-d="120" style="margin:0;max-width:520px;font:400 17px/1.6 var(--sans);color:#6B7487;text-wrap:pretty">Um site apresenta. Uma landing page conduz: cada seção antecipa uma dúvida, responde e aproxima o visitante do contato.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,6vw,96px);padding-left:clamp(0px,16vw,280px)">
+      <div data-rv="up" style="display:flex;flex-direction:column;gap:16px">
+        <span style="font:400 11px/1 var(--mono);letter-spacing:.16em;color:#2F5BEA">01 — DIFERENCIAL</span>
+        <h3 style="margin:0;font:700 clamp(28px,2.6vw,44px)/1.05 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.03em;color:#0B1220">Texto antes do enfeite.</h3>
+        <p style="margin:0;max-width:420px;font:400 16px/1.6 var(--sans);color:#4A5468">O design chama a atenção. O texto convence. Escrevemos a página antes de desenhá-la — e a estrutura inteira existe para gerar contato.</p>
+      </div>
+      <div data-rv="up" data-d="120" style="display:flex;flex-direction:column;gap:16px">
+        <span style="font:400 11px/1 var(--mono);letter-spacing:.16em;color:#2F5BEA">02 — DIFERENCIAL</span>
+        <h3 style="margin:0;font:700 clamp(28px,2.6vw,44px)/1.05 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.03em;color:#0B1220">Atendimento personalizado.</h3>
+        <p style="margin:0;max-width:420px;font:400 16px/1.6 var(--sans);color:#4A5468">Chamadas de vídeo e reuniões para entender o seu negócio de perto. Nada de formulário genérico: cada página começa numa conversa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="06 Antes e depois" style="position:relative;padding:clamp(100px,14vh,180px) var(--m);background:#04060A">
+  <div style="max-width:1560px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:clamp(36px,6vh,64px)">
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <span data-rv="fade" style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">(06) Antes e depois — exemplo conceitual</span>
+        <h2 style="margin:0;display:flex;flex-direction:column">
+          <span style="overflow:hidden"><span data-rv="mask" style="display:block;font:700 clamp(40px,6vw,108px)/.95 var(--sans);font-variation-settings:'wdth' 92;letter-spacing:-.04em">Mesma empresa.</span></span>
+          <span style="overflow:hidden"><span data-rv="mask" data-d="100" style="display:block;font:italic 400 clamp(44px,6.6vw,118px)/1 var(--serif);color:#B9C1CE">Outra percepção.</span></span>
+        </h2>
+      </div>
+      <p data-rv="up" style="margin:0;max-width:340px;font:400 15px/1.6 var(--sans);color:#7D8697;text-wrap:pretty">Não é sobre estar na internet. É sobre <span style="color:#EEF1F5">como você é percebido</span> quando alguém chega. Arraste para comparar.</p>
+    </div>
+
+    <div ref="{{ baRef }}" onPointerDown="{{ baDown }}" onPointerMove="{{ baMove }}" onPointerUp="{{ baUp }}" onPointerCancel="{{ baUp }}" data-cursor="Arrastar" style="position:relative;width:{{ baW }};margin:0 auto;aspect-ratio:{{ baAR }};border-radius:{{ baR }};overflow:hidden;container-type:inline-size;border:1px solid rgba(214,222,235,.14);touch-action:pan-y;user-select:none;box-shadow:0 60px 120px -40px rgba(0,0,0,.9)">
+      <sc-if value="{{ notMob }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;inset:0;background:#FFFFFF;color:#333;font-family:Arial,Helvetica,sans-serif">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:1.6cqw 3cqw;background:#fff;border-bottom:1px solid #e3e3e3">
+            <span style="font:700 1.7cqw/1 Arial,sans-serif;color:#1F4E9C">VALE ADVOCACIA</span>
+            <span style="display:flex;gap:1.8cqw;font:400 1cqw Arial,sans-serif;color:#555"><span style="color:#1F4E9C">Início</span><span>Quem somos</span><span>Áreas de atuação</span><span>Equipe</span><span>Artigos</span><span>Contato</span></span>
+            <span style="font:700 1cqw Arial,sans-serif;color:#1F4E9C">(11) 0000-0000</span>
+          </div>
+          <div style="position:relative;height:44%;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&amp;fit=crop&amp;w=1600&amp;q=70" alt="Escritório — imagem genérica" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2cqw;color:#fff;text-align:center">
+              <span style="font:700 3.2cqw/1.1 Arial,sans-serif">Bem-vindo à Vale Advocacia</span>
+              <span style="font:400 1.3cqw Arial,sans-serif">Tradição, ética e compromisso com nossos clientes.</span>
+              <span style="padding:1cqw 2.4cqw;background:#1F4E9C;font:700 1cqw Arial,sans-serif;border-radius:3px">SAIBA MAIS</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2cqw;padding:3cqw">
+            <div style="display:flex;flex-direction:column;gap:.8cqw;align-items:center;text-align:center;padding:1.6cqw;border:1px solid #e6e6e6"><span style="width:3cqw;height:3cqw;border-radius:50%;background:#DCE6F5"></span><span style="font:700 1.4cqw Arial,sans-serif;color:#1F4E9C">Missão</span><span style="font:400 .95cqw/1.5 Arial,sans-serif;color:#777">Oferecer serviços jurídicos de qualidade com dedicação e seriedade.</span></div>
+            <div style="display:flex;flex-direction:column;gap:.8cqw;align-items:center;text-align:center;padding:1.6cqw;border:1px solid #e6e6e6"><span style="width:3cqw;height:3cqw;border-radius:50%;background:#DCE6F5"></span><span style="font:700 1.4cqw Arial,sans-serif;color:#1F4E9C">Visão</span><span style="font:400 .95cqw/1.5 Arial,sans-serif;color:#777">Ser referência em soluções jurídicas na região.</span></div>
+            <div style="display:flex;flex-direction:column;gap:.8cqw;align-items:center;text-align:center;padding:1.6cqw;border:1px solid #e6e6e6"><span style="width:3cqw;height:3cqw;border-radius:50%;background:#DCE6F5"></span><span style="font:700 1.4cqw Arial,sans-serif;color:#1F4E9C">Valores</span><span style="font:400 .95cqw/1.5 Arial,sans-serif;color:#777">Ética, transparência, respeito e comprometimento.</span></div>
+          </div>
+        </div>
+        <div style="position:absolute;inset:0;clip-path:{{ baClip }};background:#070A10;color:#EEF1F5">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:2cqw 3.2cqw">
+            <span style="display:flex;align-items:baseline;gap:.8cqw"><span style="font:700 1.6cqw/1 var(--sans);font-variation-settings:'wdth' 110;letter-spacing:.2em">VALE</span><span style="font:400 .75cqw var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">advocacia empresarial</span></span>
+            <span style="display:flex;gap:2.4cqw;font:400 .95cqw var(--sans);color:#B9C1CE"><span>Atuação</span><span>Sócios</span><span>Contato</span></span>
+            <span style="padding:.9cqw 1.6cqw;border-radius:999px;border:1px solid rgba(238,241,245,.35);font:500 .9cqw var(--sans)">Falar com um advogado</span>
+          </div>
+          <div style="position:absolute;left:3.2cqw;top:9cqw;width:44cqw;display:flex;flex-direction:column;gap:1.8cqw">
+            <span style="font:400 .8cqw var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#AFC4FF">Direito empresarial — São Paulo</span>
+            <span style="font:400 6.2cqw/.95 var(--serif);letter-spacing:-.01em">Decisões difíceis pedem <em style="color:#B9C1CE">clareza.</em></span>
+            <span style="max-width:32cqw;font:400 1.15cqw/1.6 var(--sans);color:#B9C1CE">Assessoria para empresas que precisam decidir rápido, com segurança e sem juridiquês.</span>
+            <span style="display:flex;align-items:center;gap:1.8cqw"><span style="padding:1.2cqw 2.2cqw;border-radius:999px;background:#EEF1F5;color:#04060A;font:500 1.05cqw var(--sans)">Agendar conversa →</span><span style="font:500 1cqw var(--sans);border-bottom:1px solid rgba(238,241,245,.4);padding-bottom:.3cqw">Como atuamos</span></span>
+          </div>
+          <div style="position:absolute;right:3.2cqw;top:7cqw;bottom:9cqw;width:40cqw;overflow:hidden;border-radius:.6cqw">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Edifício corporativo — imagem conceitual" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.8)">
+            <div style="position:absolute;inset:0;background:#2448A8;mix-blend-mode:color;opacity:.45"></div>
+          </div>
+          <div style="position:absolute;left:3.2cqw;right:3.2cqw;bottom:2.6cqw;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2cqw;padding-top:1.4cqw;border-top:1px solid rgba(238,241,245,.12)">
+            <span style="display:flex;gap:1cqw;font:500 1.05cqw var(--sans)"><span style="font:400 .8cqw var(--mono);color:#7D8697">01</span>Societário</span>
+            <span style="display:flex;gap:1cqw;font:500 1.05cqw var(--sans)"><span style="font:400 .8cqw var(--mono);color:#7D8697">02</span>Contratos</span>
+            <span style="display:flex;gap:1cqw;font:500 1.05cqw var(--sans)"><span style="font:400 .8cqw var(--mono);color:#7D8697">03</span>Tributário</span>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;background:#fff;color:#333;font-family:Arial,sans-serif;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:4cqw 5cqw;border-bottom:1px solid #e3e3e3"><span style="font:700 4.6cqw Arial,sans-serif;color:#1F4E9C">VALE ADVOCACIA</span><span style="font:700 6cqw Arial;color:#1F4E9C">≡</span></div>
+          <div style="position:relative;height:38%"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&amp;fit=crop&amp;w=800&amp;q=70" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3cqw;color:#fff;text-align:center;padding:0 5cqw"><span style="font:700 6.4cqw/1.15 Arial">Bem-vindo à Vale Advocacia</span><span style="padding:2.4cqw 5cqw;background:#1F4E9C;font:700 3cqw Arial;border-radius:3px">SAIBA MAIS</span></div></div>
+          <div style="display:flex;flex-direction:column;gap:3cqw;padding:5cqw"><div style="padding:4cqw;border:1px solid #e6e6e6;text-align:center"><span style="display:block;font:700 4.4cqw Arial;color:#1F4E9C">Missão</span><span style="font:400 3.2cqw/1.5 Arial;color:#777">Oferecer serviços jurídicos de qualidade com dedicação.</span></div><div style="padding:4cqw;border:1px solid #e6e6e6;text-align:center"><span style="display:block;font:700 4.4cqw Arial;color:#1F4E9C">Visão</span><span style="font:400 3.2cqw/1.5 Arial;color:#777">Ser referência em soluções jurídicas.</span></div></div>
+        </div>
+        <div style="position:absolute;inset:0;clip-path:{{ baClip }};background:#070A10;color:#EEF1F5;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:5cqw 6cqw"><span style="font:700 4.4cqw/1 var(--sans);letter-spacing:.2em">VALE</span><span style="font:400 2.6cqw var(--mono);letter-spacing:.16em;color:#7D8697">MENU</span></div>
+          <div style="position:relative;height:40%;margin:0 6cqw;overflow:hidden;border-radius:2cqw"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.8)"><div style="position:absolute;inset:0;background:#2448A8;mix-blend-mode:color;opacity:.45"></div></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:6cqw">
+            <div style="display:flex;flex-direction:column;gap:3cqw"><span style="font:400 2.4cqw var(--mono);letter-spacing:.2em;color:#AFC4FF">DIREITO EMPRESARIAL</span><span style="font:400 11cqw/.95 var(--serif)">Decisões difíceis pedem <em style="color:#B9C1CE">clareza.</em></span></div>
+            <span style="display:flex;align-items:center;justify-content:center;height:12cqw;border-radius:999px;background:#EEF1F5;color:#04060A;font:500 3.8cqw var(--sans)">Agendar conversa</span>
+          </div>
+        </div>
+      </sc-if>
+      <span style="position:absolute;top:16px;left:16px;padding:7px 12px;border-radius:999px;background:rgba(4,6,10,.75);color:#EEF1F5;font:500 10px/1 var(--mono);letter-spacing:.16em;pointer-events:none">ANTES</span>
+      <span style="position:absolute;top:16px;right:16px;padding:7px 12px;border-radius:999px;background:#EEF1F5;color:#04060A;font:500 10px/1 var(--mono);letter-spacing:.16em;pointer-events:none">DEPOIS — GR ONE</span>
+      <div style="position:absolute;top:0;bottom:0;left:{{ baPct }};width:1px;background:#EEF1F5;box-shadow:0 0 24px rgba(175,196,255,.8);pointer-events:none"></div>
+      <button role="slider" aria-label="Comparar antes e depois" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ baNow }}" onKeyDown="{{ baKey }}" style="position:absolute;top:50%;left:{{ baPct }};width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:rgba(4,6,10,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#EEF1F5;display:flex;align-items:center;justify-content:center;gap:6px;transition:transform .25s,background .25s" style-hover="transform:scale(1.08);background:rgba(61,109,255,.6)" style-active="transform:scale(.95)"><svg width="22" height="12" viewBox="0 0 22 12" fill="none"><path d="M6 1L1 6L6 11M16 1L21 6L16 11" stroke="currentColor" stroke-width="1.3"></path></svg></button>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="07 Investimento" style="position:relative;margin:0 clamp(8px,1.2vw,16px);border-radius:clamp(20px,2.4vw,32px);color:#0B1220;overflow:hidden;padding:clamp(100px,14vh,180px) var(--m);background:radial-gradient(ellipse 50% 50% at 10% 100%,rgba(61,109,255,.10),transparent 70%),linear-gradient(180deg,#F4F5F7,#E9ECF0)">
+  <div style="max-width:1560px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(48px,7vw,120px);align-items:flex-start">
+    <div style="flex:1 1 420px;display:flex;flex-direction:column;gap:28px">
+      <span data-rv="fade" style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#6B7487">(07) Investimento</span>
+      <h2 style="margin:0;display:flex;flex-direction:column">
+        <span style="overflow:hidden"><span data-rv="mask" style="display:block;font:700 clamp(38px,5vw,88px)/.95 var(--sans);font-variation-settings:'wdth' 92;letter-spacing:-.04em;color:#0B1220">Investimento</span></span>
+        <span style="overflow:hidden;padding-bottom:.08em"><span data-rv="mask" data-d="100" style="display:block;font:italic 400 clamp(64px,9vw,168px)/.95 var(--serif);background:linear-gradient(180deg,#0B1220 30%,#56607A);-webkit-background-clip:text;background-clip:text;color:transparent">sob consulta.</span></span>
+      </h2>
+      <p data-rv="up" style="margin:0;max-width:520px;font:400 clamp(18px,1.5vw,22px)/1.5 var(--sans);color:#0B1220;text-wrap:pretty">Fazemos um atendimento personalizado para entender a dor real do seu negócio — e resolvê-la com uma página que transforma visitantes em clientes.</p>
+      <p data-rv="up" data-d="100" style="margin:0;max-width:460px;font:400 15px/1.6 var(--sans);color:#4A5468">Por isso não existe tabela: o investimento é definido depois de conhecermos o seu cenário.</p>
+      <div data-rv="up" data-d="200" style="margin-top:8px"><a href="{{ wa }}" target="_blank" rel="noopener" data-magnetic="" data-cursor="Conversar" style="display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 10px 0 26px;border-radius:999px;font:500 15px/1 var(--sans);color:#EEF1F5;background:linear-gradient(#3D6DFF,#3D6DFF) no-repeat left center / 0% 100%,#0B1220;transition:background-size .65s cubic-bezier(.77,0,.18,1),transform .2s" style-hover="background-size:100% 100%,100% 100%;color:#FFFFFF" style-active="transform:scale(.97)">Agendar minha conversa<span style="width:36px;height:36px;border-radius:50%;background:#EEF1F5;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#0B1220" stroke-width="1.4"></path></svg></span></a></div>
+    </div>
+    <div style="flex:1 1 380px;display:flex;flex-direction:column;padding-top:clamp(0px,6vh,80px)">
+      <span style="font:400 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#6B7487;padding-bottom:18px">Como funciona o atendimento</span>
+      <div data-rv="up" style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;padding:24px 0;border-top:1px solid rgba(11,18,32,.12)"><span style="font:400 11px/1.6 var(--mono);color:#2F5BEA">01</span><span style="display:flex;flex-direction:column;gap:6px"><span style="font:600 20px/1.2 var(--sans);letter-spacing:-.01em">Primeiro contato</span><span style="font:400 15px/1.55 var(--sans);color:#4A5468">Você nos chama no WhatsApp e marcamos um horário.</span></span></div>
+      <div data-rv="up" data-d="80" style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;padding:24px 0;border-top:1px solid rgba(11,18,32,.12)"><span style="font:400 11px/1.6 var(--mono);color:#2F5BEA">02</span><span style="display:flex;flex-direction:column;gap:6px"><span style="font:600 20px/1.2 var(--sans);letter-spacing:-.01em">Reunião de diagnóstico</span><span style="font:400 15px/1.55 var(--sans);color:#4A5468">Por chamada de vídeo ou presencial: público, oferta, objeções e o que hoje impede o contato.</span></span></div>
+      <div data-rv="up" data-d="160" style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;padding:24px 0;border-top:1px solid rgba(11,18,32,.12);border-bottom:1px solid rgba(11,18,32,.12)"><span style="font:400 11px/1.6 var(--mono);color:#2F5BEA">03</span><span style="display:flex;flex-direction:column;gap:6px"><span style="font:600 20px/1.2 var(--sans);letter-spacing:-.01em">Proposta sob medida</span><span style="font:400 15px/1.55 var(--sans);color:#4A5468">Escopo, prazo e investimento pensados para o seu caso — não para um pacote.</span></span></div>
+      <sc-if value="{{ showNums }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:32px;padding:20px;border:1px dashed rgba(47,91,234,.4);border-radius:12px">
+          <span style="grid-column:1 / -1;font:400 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#2F5BEA">Espaço reservado — métricas futuras (desativado)</span>
+          <span style="font:200 48px/.9 var(--sans);color:rgba(11,18,32,.2)">—</span><span style="font:200 48px/.9 var(--sans);color:rgba(11,18,32,.2)">—</span><span style="font:200 48px/.9 var(--sans);color:rgba(11,18,32,.2)">—</span>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section id="contato" ref="{{ finRef }}" data-screen-label="08 CTA final" style="position:relative;min-height:110vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(28px,5vh,52px);padding:clamp(100px,14vh,160px) var(--m);text-align:center;overflow:hidden;background:radial-gradient(ellipse 50% 45% at 50% 34%,rgba(61,109,255,.24),transparent 70%),#04060A">
+  <span style="position:absolute;top:clamp(40px,8vh,90px);left:var(--m);font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">(08) Contato</span>
+  <div style="position:relative">{{ finMark }}</div>
+  <h2 style="margin:0;display:flex;flex-direction:column;align-items:center">
+    <span style="overflow:hidden"><span data-rv="mask" style="display:block;font:700 clamp(38px,6vw,112px)/.95 var(--sans);font-variation-settings:'wdth' 92;letter-spacing:-.04em">Sua próxima página</span></span>
+    <span style="overflow:hidden"><span data-rv="mask" data-d="100" style="display:block;font:italic 400 clamp(42px,6.6vw,124px)/1.02 var(--serif);color:#B9C1CE">começa em uma conversa.</span></span>
+  </h2>
+  <a href="{{ wa }}" target="_blank" rel="noopener" data-magnetic="" data-cursor="Conversar" data-rv="up" data-d="200" style="display:inline-flex;align-items:center;gap:18px;height:64px;padding:0 10px 0 30px;border-radius:999px;border:1px solid rgba(214,222,235,.4);font:500 16px/1 var(--sans);color:#EEF1F5;background:linear-gradient(#EEF1F5,#EEF1F5) no-repeat left center / 0% 100%,linear-gradient(135deg,rgba(61,109,255,.4),rgba(255,255,255,.03));transition:background-size .65s cubic-bezier(.77,0,.18,1),color .4s,border-color .4s,transform .2s" style-hover="background-size:100% 100%,100% 100%;color:#04060A;border-color:#EEF1F5" style-active="transform:scale(.97)">Começar uma conversa no WhatsApp<span style="width:44px;height:44px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="13" height="13" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></a>
+  <span data-rv="fade" data-d="300" style="font:400 12px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#7D8697">Atendimento personalizado — por chamada de vídeo ou reunião</span>
+</section>
+
+<footer data-screen-label="09 Rodapé" style="position:relative;padding:48px var(--m) 28px;background:#04060A;overflow:hidden">
+  <div style="max-width:1680px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;font:400 13px/1.5 var(--sans);color:#7D8697">
+      <span>GR One — estúdio de landing pages premium</span>
+      <nav aria-label="Rodapé" style="display:flex;gap:24px;flex-wrap:wrap"><a href="#inicio" style="color:#B9C1CE">Início</a><a href="#metodo" style="color:#B9C1CE">Método</a><a href="#processo" style="color:#B9C1CE">Processo</a><a href="#contato" style="color:#B9C1CE">Contato</a></nav>
+      <span>© 2026 GR One</span>
+    </div>
+    <div aria-hidden="true" style="font:900 clamp(80px,24vw,440px)/.78 var(--sans);font-variation-settings:'wdth' 118;letter-spacing:-.06em;text-align:center;background:linear-gradient(180deg,rgba(238,241,245,.22),rgba(238,241,245,0) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none">GR ONE</div>
+  </div>
+</footer>
+
+<sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ mBarRef }}" style="position:fixed;left:12px;right:12px;bottom:12px;z-index:60;transform:translateY(140%);transition:transform .6s cubic-bezier(.16,1,.3,1)">
+    <a href="{{ wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 22px;border-radius:999px;background:rgba(238,241,245,.96);color:#04060A;font:600 14px/1 var(--sans);box-shadow:0 20px 40px -10px rgba(0,0,0,.7)">Começar uma conversa<span style="width:40px;height:40px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></a>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5500000000000&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contato&quot;},&quot;mostrarNumeros&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sistema&quot;},&quot;cursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Interação&quot;},&quot;intensidade&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Sutil&quot;,&quot;Padrão&quot;,&quot;Expressiva&quot;],&quot;default&quot;:&quot;Padrão&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Interação&quot;}}">
+const FR=[[-.24,-.12,.38,-24,-5],[.18,-.04,-.22,15,3],[-.12,.05,.5,-11,-2],[.28,.13,-.32,26,6]];
+const V=[[-38,-30,-40,.2],[-16,32,25,-.1],[4,-38,-15,.3],[14,36,35,-.2],[30,-26,-28,.15],[40,20,50,.4]];
+const KF=[{a:0,b:0,rx:-6,ry:-18},{a:.2,b:0,rx:12,ry:150},{a:1,b:0,rx:-8,ry:200},{a:0,b:1,rx:-22,ry:395},{a:0,b:0,rx:-4,ry:360}];
+const cl=v=>Math.max(0,Math.min(1,v));
+const ss=(a,b,x)=>{const t=cl((x-a)/(b-a));return t*t*(3-2*t);};
+const ez=t=>1-Math.pow(1-cl(t),3);
+const SILVER='linear-gradient(100deg,#5B6475 0%,#9AA3B2 22%,#EEF2F7 40%,#FFFFFF 47%,#C4CCD8 54%,#AFC4FF 64%,#6B7483 80%,#3E4656 100%)';
+const U=(id,w)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w||900}&q=80`;
+const CONCEPTS=[
+ {seg:'Imobiliária',brand:'Morada Nove',eyebrow:'Residências de autor',head:'Viver acima do comum.',cta:'Agendar visita',img:U('1600596542815-ffad4c1539a9'),alt:'Residência contemporânea — imagem conceitual',intent:'Patrimônio em primeiro plano: imagem em tela cheia, busca discreta e a visita agendada como única ação.',light:false,hfont:"700 40px/.9 'Archivo',sans-serif"},
+ {seg:'Clínica',brand:'Lume',eyebrow:'Medicina estética',head:'Cuidado que começa pela escuta.',cta:'Agendar avaliação',img:U('1629909613654-28e377c37b09'),alt:'Ambiente clínico — imagem conceitual',intent:'Confiança antes de tudo: fundo claro, serifa acolhedora e um caminho curto até a avaliação.',light:true,hfont:"400 38px/1 'Instrument Serif',serif"},
+ {seg:'Arquitetura',brand:'Atelier Traço',eyebrow:'Arquitetura e interiores',head:'Espaço, luz, matéria.',cta:'Iniciar um projeto',img:U('1487958449943-2429e8be8625'),alt:'Arquitetura contemporânea — imagem conceitual',intent:'Linguagem de revista: tipografia como estrutura, imagens em grade assimétrica, projetos contados como narrativa.',light:false,hfont:"400 44px/.95 'Instrument Serif',serif"},
+ {seg:'Turismo',brand:'Rota Serena',eyebrow:'Viagens sob medida',head:'O mundo, no seu ritmo.',cta:'Desenhar minha viagem',img:U('1507525428034-b723cf961d3e'),alt:'Paisagem litorânea — imagem conceitual',intent:'Desejo e calma: paisagem dominante, serifa itálica e roteiros sob medida no lugar de pacotes.',light:false,hfont:"italic 400 42px/.95 'Instrument Serif',serif"}
+];
+const STEPS=[
+ {n:'01',t:'Estratégia',d:'Antes do layout, o negócio. Entendemos quem decide, o que ele receia e por que escolheria você.',items:['Público e decisor','Oferta e diferenciais','Objeções a responder'],out:'Diagnóstico e objetivo da página'},
+ {n:'02',t:'Direção visual',d:'Tipografia, imagens e ritmo definidos para a sua marca — nunca adaptados de um modelo pronto.',items:['Referências e linguagem','Tipografia e paleta','Tratamento de imagem'],out:'Direção de arte aprovada'},
+ {n:'03',t:'Criação',d:'Texto e estrutura nascem juntos. Cada seção responde uma dúvida e aproxima o visitante do contato.',items:['Arquitetura da informação','Texto persuasivo','Desenho de todas as telas'],out:'Página desenhada e escrita'},
+ {n:'04',t:'Desenvolvimento',d:'Construída em Next.js e publicada na Vercel: rápida, estável e impecável em qualquer tela.',items:['Computador, tablet e celular','Carregamento rápido','Contato direto pelo WhatsApp'],out:'Página funcionando em ambiente de teste'},
+ {n:'05',t:'Entrega',d:'Refinamos com você até estar certo — e publicamos no seu domínio.',items:['Refinamento final','Publicação no seu domínio','Orientação de uso'],out:'Sua página no ar'}
+];
+const ANAT=[{t:'Promessa',d:'Em três segundos o visitante entende o que você faz e para quem.'},{t:'Identificação',d:'A dor do cliente dita com as palavras dele. É aqui que ele pensa: é comigo.'},{t:'Método',d:'Como você resolve, mostrado com clareza. Confiança nasce de um processo visível.'},{t:'Objeções',d:'As dúvidas que travam a decisão, respondidas antes de serem perguntadas.'},{t:'Diferenciais',d:'Por que você — e não o próximo resultado da busca.'},{t:'Chamada',d:'Uma única ação, repetida no momento certo. Sem distração, sem ruído.'}];
+const EXP=[{n:'01',t:'Inteira',d:'A marca como ponto de partida.'},{n:'02',t:'Em movimento',d:'O olhar gira em torno do problema.'},{n:'03',t:'Fragmentada',d:'Cada parte do negócio, separada.'},{n:'04',t:'Reorganizada',d:'As partes voltam, agora em ordem.'},{n:'05',t:'Inteira de novo',d:'Mesma essência. Outra presença.'}];
+
+class Component extends DCLogic {
+  state={w:1440,anat:0,tab:0,menu:false,ba:50,expIdx:0,nav:0};
+  marks={};markCache={};
+  r={root:React.createRef(),cur:React.createRef(),ring:React.createRef(),ringIn:React.createRef(),ringLbl:React.createRef(),header:React.createRef(),hero:React.createRef(),heroWord:React.createRef(),scrollDot:React.createRef(),demo:React.createRef(),s3:React.createRef(),proc:React.createRef(),track:React.createRef(),procFill:React.createRef(),exp:React.createRef(),man:React.createRef(),mq1:React.createRef(),mq2:React.createRef(),ba:React.createRef(),fin:React.createRef(),mBar:React.createRef(),anat:React.createRef()};
+  mouse={x:-100,y:-100,sx:0,sy:0,rx:-100,ry:-100};
+
+  k(){return ({'Sutil':.5,'Padrão':1,'Expressiva':1.6})[this.props.intensidade||'Padrão']||1;}
+
+  componentDidMount(){
+    this.t0=performance.now();this.tabStart=this.t0;
+    this.onResize=()=>{const w=document.documentElement.clientWidth||window.innerWidth;if(w&&w!==this.state.w)this.setState({w});};this.onResize();
+    window.addEventListener('resize',this.onResize);
+    try{this.ro=new ResizeObserver(()=>requestAnimationFrame(this.onResize));this.ro.observe(document.body);}catch(x){}
+    requestAnimationFrame(()=>this.onResize());setTimeout(this.onResize,300);
+    this.onMove=e=>{this.mouse.x=e.clientX;this.mouse.y=e.clientY;if(e.pointerType==='mouse')this.showCursor(true);this.magnet(e);};
+    window.addEventListener('pointermove',this.onMove,{passive:true});
+    this.onOver=e=>this.cursorHover(e.target);
+    document.addEventListener('pointerover',this.onOver);
+    this.onLeaveDoc=()=>this.showCursor(false);
+    document.addEventListener('pointerleave',this.onLeaveDoc);
+    this.io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){this.reveal(en.target);this.io.unobserve(en.target);}}),{rootMargin:'0px 0px -8% 0px'});
+    this.syncBody();this.cache();
+    this.tick();
+  }
+  componentDidUpdate(pp){const w=this.state.w,mn=this.state.menu;if(w!==this._lw||mn!==this._lm){this._lw=w;this._lm=mn;this.cache();}const c=this.props.cursor;if(c!==this._lc){this._lc=c;this.syncBody();}}
+  componentWillUnmount(){cancelAnimationFrame(this.raf);window.removeEventListener('resize',this.onResize);window.removeEventListener('pointermove',this.onMove);document.removeEventListener('pointerover',this.onOver);document.removeEventListener('pointerleave',this.onLeaveDoc);this.io&&this.io.disconnect();this.ro&&this.ro.disconnect();document.body.classList.remove('gr-cursor');}
+
+  syncBody(){this.cursorOn=this.props.cursor!==false&&matchMedia('(pointer:fine)').matches;document.body.classList.toggle('gr-cursor',this.cursorOn);if(!this.cursorOn)this.showCursor(false);}
+  showCursor(v){const on=v&&this.cursorOn;if(on===this.curVis)return;this.curVis=on;[this.r.cur.current,this.r.ring.current].forEach(el=>{if(el)el.style.opacity=on?'1':'0';});}
+  cursorHover(t){const inn=this.r.ringIn.current,lbl=this.r.ringLbl.current;if(!inn||!t||!t.closest)return;const el=t.closest('[data-cursor],a,button');const label=el&&el.getAttribute('data-cursor');let s=38,bg='transparent',bc='rgba(238,241,245,.45)';if(label){s=86;bg='#EEF1F5';bc='#EEF1F5';}else if(el){s=58;bc='rgba(175,196,255,.8)';}inn.style.width=s+'px';inn.style.height=s+'px';inn.style.margin=`${-s/2}px 0 0 ${-s/2}px`;inn.style.background=bg;inn.style.borderColor=bc;lbl.textContent=label||'';lbl.style.opacity=label?'1':'0';}
+  magnet(e){const t=e.target&&e.target.closest&&e.target.closest('[data-magnetic]');if(this.magEl&&this.magEl!==t){this.magEl.style.translate='0 0';this.magEl=null;}if(t&&this.state.w>=900){const r=t.getBoundingClientRect();const dx=(e.clientX-(r.left+r.width/2))*.18,dy=(e.clientY-(r.top+r.height/2))*.28;t.style.transition+=t.style.transition.includes('translate')?'':',translate .3s';t.style.translate=`${dx}px ${dy}px`;this.magEl=t;}}
+
+  cache(){const root=this.r.root.current;if(!root)return;this.chars=[...root.querySelectorAll('[data-ch]')];this.wf=[...root.querySelectorAll('[data-wf]')];this.wA=root.querySelector('[data-w="a"]');this.wB=root.querySelector('[data-w="b"]');this.wQ=root.querySelector('[data-w="q"]');this.bars=[...root.querySelectorAll('[data-tabbar]')];
+    root.querySelectorAll('[data-rv]:not([data-rvd])').forEach(el=>{el.setAttribute('data-rvd','');const f=this.kf(el.getAttribute('data-rv'))[0];Object.assign(el.style,f);this.io.observe(el);});
+    root.querySelectorAll('img:not([data-err])').forEach(img=>{img.setAttribute('data-err','');img.addEventListener('error',()=>{img.style.opacity='0';});});}
+  kf(type){if(type==='mask')return[{transform:'translateY(105%)'},{transform:'translateY(0)'}];if(type==='fade')return[{opacity:'0'},{opacity:'1'}];return[{opacity:'0',transform:'translateY(36px)'},{opacity:'1',transform:'translateY(0)'}];}
+  reveal(el){const type=el.getAttribute('data-rv');const d=+el.getAttribute('data-d')||0;const k=this.kf(type);const a=el.animate(k,{duration:type==='fade'?1200:1300,delay:d,easing:'cubic-bezier(.16,1,.3,1)',fill:'forwards'});a.onfinish=()=>{Object.assign(el.style,k[1]);};a.finished&&a.finished.catch(()=>{});}
+
+  getMark(key,size){const ck=key+':'+size;if(this.markCache[key]&&this.markCache[key].ck===ck)return this.markCache[key].el;const el=this.buildMark(key,size);this.markCache[key]={ck,el};return el;}
+  buildMark(key,S){const h=React.createElement;const m={obj:null,slices:[],fronts:[],size:S};this.marks[key]=m;const L=10,d=S*.011;const cuts=[0,32,50,68,100];
+    const base={position:'absolute',left:0,top:0,width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'Archivo',sans-serif",fontWeight:800,fontVariationSettings:"'wdth' 112",fontSize:S+'px',lineHeight:.82,letterSpacing:'-0.05em',userSelect:'none',whiteSpace:'nowrap'};
+    const slices=[];for(let s=0;s<4;s++){const clip=`inset(${cuts[s]}% -10% ${100-cuts[s+1]}% -10%)`;const kids=[];
+      for(let l=L;l>=1;l--){const t=l/L;const c=l===1?'#9FB3E6':`hsl(222 ${16-t*6}% ${58-t*47}%)`;kids.push(h('span',{key:l,style:Object.assign({},base,{clipPath:clip,color:c,transform:`translateZ(${-l*d}px)`})},'GR'));}
+      kids.push(h('span',{key:'f',ref:el=>{if(el)m.fronts[s]=el;},style:Object.assign({},base,{clipPath:clip,backgroundImage:SILVER,backgroundSize:'320% 100%',backgroundPosition:'50% 50%',WebkitBackgroundClip:'text',backgroundClip:'text',color:'transparent',WebkitTextFillColor:'transparent'})},'GR'));
+      slices.push(h('div',{key:s,ref:el=>{if(el)m.slices[s]=el;},style:{position:'absolute',inset:0,transformStyle:'preserve-3d',willChange:'transform'}},kids));}
+    return h('div',{key:key+S,style:{position:'relative',width:S*1.42+'px',height:S*.82+'px',perspective:S*4.5+'px'}},
+      h('div',{style:{position:'absolute',left:'18%',right:'18%',bottom:-S*.22+'px',height:S*.07+'px',borderRadius:'50%',background:'radial-gradient(closest-side,rgba(0,0,0,.85),transparent)',filter:'blur(8px)'}}),
+      h('div',{ref:el=>{if(el)m.obj=el;},style:{position:'absolute',inset:0,transformStyle:'preserve-3d',willChange:'transform'}},slices));}
+  mark(key,st){const m=this.marks[key];if(!m||!m.obj||!m.obj.isConnected)return;const S=m.size;
+    m.obj.style.transform=`translate3d(0,${st.y||0}px,0) rotateX(${st.rx}deg) rotateY(${st.ry}deg)`;
+    for(let s=0;s<4;s++){const el=m.slices[s];if(!el)continue;const A=FR[s],a=st.a,b=st.b,e=s-1.5;
+      el.style.transform=`translate3d(${a*A[0]*S}px,${(a*A[1]+b*e*.1)*S}px,${(a*A[2]-b*e*.22)*S}px) rotateY(${a*A[3]}deg) rotateZ(${a*A[4]}deg)`;
+      const f=m.fronts[s];if(f)f.style.backgroundPosition=`${50+Math.sin(st.ry*Math.PI/180)*42+a*A[3]*.8}% 50%`;}}
+  vis(el,vh){if(!el)return null;const r=el.getBoundingClientRect();return(r.bottom>-50&&r.top<vh+50)?r:null;}
+
+  tick=()=>{this.raf=requestAnimationFrame(this.tick);
+    const now=performance.now(),t=(now-this.t0)/1000,vw=innerWidth,vh=innerHeight,sy=scrollY,mob=vw<760,k=this.k(),m=this.mouse,R=this.r;
+    m.sx+=(m.x-m.sx)*.06;m.sy+=(m.y-m.sy)*.06;const mx=m.x<0?0:(m.sx/vw)*2-1,my=m.y<0?0:(m.sy/vh)*2-1;
+    if(this.curVis){m.rx+=(m.x-m.rx)*.2;m.ry+=(m.y-m.ry)*.2;R.cur.current.style.transform=`translate3d(${m.x}px,${m.y}px,0)`;R.ring.current.style.transform=`translate3d(${m.rx}px,${m.ry}px,0)`;}
+    const H=R.header.current;if(H){const on=sy>30||this.state.menu;if(on!==this.hOn){this.hOn=on;H.style.background=on?'rgba(4,6,10,.7)':'transparent';H.style.backdropFilter=on?'blur(16px)':'none';H.style.webkitBackdropFilter=on?'blur(16px)':'none';H.style.borderBottomColor=on?'rgba(214,222,235,.08)':'transparent';}}
+    const hr=this.vis(R.hero.current,vh);if(hr){const p=cl(-hr.top/hr.height);const w=R.heroWord.current;if(w){const base=vw<760?76:vw<1100?92:106;w.style.fontVariationSettings=`'wdth' ${base-p*28}`;w.style.transform=`translate3d(${-p*7}vw,0,0)`;}
+      if(R.scrollDot.current)R.scrollDot.current.style.transform=`translateY(${((t*.6)%1)*52-18}px)`;
+      this.mark('hero',{a:ez(p*1.3)*.95,b:0,rx:(-my*9+Math.sin(t*.5)*3)*k,ry:(mx*22+Math.sin(t*.32)*10)*k-p*50,y:Math.sin(t*.8)*7-p*90});}
+    const dr=this.vis(R.demo.current,vh);if(dr){this.mark('demo',{a:1,b:0,rx:14,ry:t*22*k,y:Math.sin(t)*3});
+      let prog=(now-this.tabStart)/8000;if(this.hoverDemo){this.tabStart+=16.7;prog=(now-this.tabStart)/8000;}
+      if(prog>=1){this.tabStart=now;this.setState(s=>({tab:(s.tab+1)%4}));prog=0;}
+      (this.bars||[]).forEach(b=>{b.style.transform=`scaleX(${+b.getAttribute('data-tabbar')===this.state.tab?cl(prog):0})`;});}
+    else this.tabStart=now-((now-this.tabStart)%8000);
+    const r3=this.vis(R.s3.current,vh);if(r3){const p=cl(-r3.top/(r3.height-vh));const sep=ss(.04,.42,p),fade=1-ss(.28,.48,p);
+      if(this.wA){this.wA.style.transform=`translate3d(${-sep*38}vw,0,0)`;this.wA.style.opacity=fade;}
+      if(this.wB){this.wB.style.transform=`translate3d(${sep*38}vw,0,0)`;this.wB.style.opacity=fade;}
+      const fr=ss(.2,.56,p);(this.chars||[]).forEach((c,i)=>{const v=V[i];c.style.transform=`translate3d(${fr*v[0]}vw,${fr*v[1]}vh,0) rotate(${fr*v[2]}deg) scale(${1+fr*v[3]+(1-ss(0,.15,p))*.06})`;c.style.opacity=String(1-fr*(i%2?.96:.86));});
+      if(this.wQ){const q=ss(.46,.6,p);this.wQ.style.opacity=q;this.wQ.style.transform=`translateY(${(1-q)*30}px)`;}
+      (this.wf||[]).forEach((el,i)=>{const a=ss(.56+i*.028,.7+i*.028,p);el.style.opacity=a;el.style.transform=el.getAttribute('data-wft')==='x'?`scaleX(${a})`:`scale(${.94+.06*a})`;});}
+    const pr=this.vis(R.proc.current,vh);if(pr){const p=cl(-pr.top/(pr.height-vh));const tr=R.track.current;if(tr){const max=tr.scrollWidth-vw;tr.style.transform=`translate3d(${-p*max}px,0,0)`;}
+      if(R.procFill.current)R.procFill.current.style.transform=`scaleX(${p})`;
+      this.mark('proc',{a:1-ss(.02,.6,p),b:ss(.3,.85,p),rx:-16+my*6*k,ry:28+p*40+mx*10*k,y:Math.sin(t*.7)*5});}
+    const er=this.vis(R.exp.current,vh);if(er){const p=cl(-er.top/(er.height-vh));const f=p*4,i=Math.min(3,Math.floor(f)),l=ss(0,1,f-i),A=KF[i],B=KF[i+1];
+      this.mark('exp',{a:A.a+(B.a-A.a)*l,b:A.b+(B.b-A.b)*l,rx:A.rx+(B.rx-A.rx)*l+my*5*k,ry:A.ry+(B.ry-A.ry)*l+mx*10*k,y:Math.sin(t*.8)*6});
+      const idx=Math.min(4,Math.round(f));if(idx!==this.state.expIdx)this.setState({expIdx:idx});}
+    const mr=this.vis(R.man.current,vh);if(mr){const x=(mr.top-vh)*.4;if(R.mq1.current)R.mq1.current.style.transform=`translate3d(${x}px,0,0)`;if(R.mq2.current)R.mq2.current.style.transform=`translate3d(${-x-vw*.9}px,0,0)`;}
+    const fr2=this.vis(R.fin.current,vh);if(fr2){const p=cl((vh-fr2.top)/(vh*1.05));const a=1-ss(.12,.8,p);this.mark('fin',{a,b:0,rx:(-my*8+Math.sin(t*.5)*2)*k,ry:mx*18*k+Math.sin(t*.3)*8+a*80,y:Math.sin(t*.8)*6});}
+    const ar=this.vis(R.anat.current,vh);if(ar&&!this.hoverAnat){if(!this.anatT)this.anatT=now;if(now-this.anatT>4000){this.anatT=now;this.setState(s=>({anat:(s.anat+1)%6}));}}
+    const secs=[R.hero.current,R.anat.current,R.proc.current||(this.r.root.current&&this.r.root.current.querySelector('#processo')),R.fin.current];let nav=0;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<vh*.45)nav=i;});if(nav!==this.state.nav)this.setState({nav});
+    const mb=R.mBar.current;if(mb){const show=sy>vh*.85&&(!fr2||fr2.top>vh*.55);if(show!==this.mbOn){this.mbOn=show;mb.style.transform=show?'translateY(0)':'translateY(140%)';}}
+  };
+
+  goTab(i){this.tabStart=performance.now();this.setState({tab:(i+4)%4});}
+  baSet(e){const el=this.r.ba.current;if(!el)return;const r=el.getBoundingClientRect();this.setState({ba:Math.round(cl((e.clientX-r.left)/r.width)*1000)/10});}
+
+  renderVals(){
+    const {w,tab,menu,ba,expIdx,nav}=this.state;const mob=w<760,desk=w>=900;
+    const num=String(this.props.whatsapp||'5500000000000').replace(/\D/g,'');
+    const wa=`https://wa.me/${num}?text=${encodeURIComponent('Olá! Quero conversar sobre uma landing page para a minha empresa.')}`;
+    const pv=i=>({clip:i===tab?'inset(0 0% 0 0%)':i<tab?'inset(0 100% 0 0%)':'inset(0 0% 0 100%)',imgT:i===tab?'scale(1)':'scale(1.16)',txt:i===tab?'translateY(0)':'translateY(28px)',op:i===tab?1:0,z:i===tab?2:1});
+    const nv=i=>({c:i===nav?'#04060A':'#B9C1CE',bg:i===nav?'#EEF1F5':'transparent'});
+    const hs=mob?Math.round(w*.56/10)*10:w<1100?Math.round(w*.34/10)*10:Math.min(460,Math.round(w*.3/10)*10);
+    const heroMarkPos=mob?'position:absolute;left:50%;top:30%;transform:translate(-50%,-50%);z-index:1':'position:absolute;left:73%;top:44%;transform:translate(-50%,-50%);z-index:1';
+    const es=mob?Math.round(w*.5/10)*10:Math.min(480,Math.round(w*.3/10)*10);
+    return {
+      rootRef:this.r.root,curRef:this.r.cur,ringRef:this.r.ring,ringInRef:this.r.ringIn,ringLblRef:this.r.ringLbl,headerRef:this.r.header,heroRef:this.r.hero,heroWordRef:this.r.heroWord,scrollDotRef:this.r.scrollDot,demoRef:this.r.demo,s3Ref:this.r.s3,procRef:this.r.proc,trackRef:this.r.track,procFillRef:this.r.procFill,expRef:this.r.exp,manRef:this.r.man,mq1Ref:this.r.mq1,mq2Ref:this.r.mq2,baRef:this.r.ba,finRef:this.r.fin,mBarRef:this.r.mBar,
+      wa,mob,notMob:!mob,desk,notDesk:!desk,menu,menuOpen:menu&&!desk,menuLabel:menu?'Fechar':'Menu',
+      toggleMenu:()=>this.setState(s=>({menu:!s.menu})),closeMenu:()=>this.setState({menu:false}),
+      nv0:nv(0),nv1:nv(1),nv2:nv(2),nv3:nv(3),
+      hmL:mob?'50%':'73%',hmT:mob?'30%':'44%',heroMark:this.getMark('hero',hs),procMark:this.getMark('proc',Math.min(170,Math.round(w*.11/10)*10)),finMark:this.getMark('fin',mob?Math.round(w*.42/10)*10:Math.min(300,Math.round(w*.2/10)*10)),
+      tabs:CONCEPTS.map((c,i)=>({seg:c.seg,idx:'0'+(i+1),i,sel:i===tab,c:i===tab?'#EEF1F5':'#7D8697',go:()=>this.goTab(i)})),
+      pImo:pv(0),pCli:pv(1),pArq:pv(2),pTur:pv(3),
+      mConcepts:CONCEPTS.map((c,i)=>{const p=pv(i);return Object.assign({},c,p,{bgImg:`url("${c.img}")`,bg:c.light?'#EEF0F3':'#070A10',fg:c.light?'#0B1220':'#EEF1F5',accent:c.light?'#3D6DFF':'#AFC4FF',brand:c.brand});}),
+      curSeg:CONCEPTS[tab].seg.toLowerCase(),curIdx:'0'+(tab+1),curIntent:CONCEPTS[tab].intent,
+      prevTab:()=>this.goTab(tab-1),nextTab:()=>this.goTab(tab+1),
+      demoEnter:()=>{this.hoverDemo=true;},demoLeave:()=>{this.hoverDemo=false;},
+      steps:STEPS,
+      expH:mob?'340vh':'440vh',
+      expStates:EXP.map((e,i)=>({...e,op:i===expIdx?1:.38,nc:i===expIdx?'#AFC4FF':'#7D8697',pad:i===expIdx?(mob?'12px 0':'20px 0'):(mob?'8px 0':'12px 0')})),
+      baW:mob?'min(100%,360px)':'100%',baAR:mob?'9 / 16':'16 / 9.4',baR:mob?'26px':'16px',
+      baClip:`inset(0 0 0 ${ba}%)`,baPct:ba+'%',baNow:Math.round(ba),
+      baDown:e=>{this.baDrag=true;try{e.currentTarget.setPointerCapture(e.pointerId);}catch(x){}this.baSet(e);},
+      baMove:e=>{if(this.baDrag)this.baSet(e);},baUp:()=>{this.baDrag=false;},
+      baKey:e=>{const d={ArrowLeft:-5,ArrowRight:5}[e.key];if(d){e.preventDefault();this.setState(s=>({ba:Math.max(0,Math.min(100,s.ba+d))}));}if(e.key==='Home')this.setState({ba:0});if(e.key==='End')this.setState({ba:100});},
+      showNums:!!this.props.mostrarNumeros,anatRef:this.r.anat,
+      ...Object.fromEntries([0,1,2,3,4,5].map(i=>{const on=i===this.state.anat;return['a'+i,{bd:on?'#3D6DFF':'rgba(11,18,32,.07)',bg:on?'rgba(61,109,255,.06)':'transparent',bc:on?'#3D6DFF':'#C3CAD5',bs:on?'scale(1)':'scale(.78)',bar:on?'rgba(61,109,255,.6)':'rgba(11,18,32,.12)',op:on?1:.6}];})),
+      anatParts:ANAT.map((p,i)=>({...p,n:'0'+(i+1),op:i===this.state.anat?1:.45,nc:i===this.state.anat?'#2F5BEA':'#6B7487',dh:i===this.state.anat?'120px':'0px',go:()=>{this.anatT=performance.now();if(this.state.anat!==i)this.setState({anat:i});}})),
+      anatEnter:()=>{this.hoverAnat=true;},anatLeave:()=>{this.hoverAnat=false;this.anatT=performance.now();}
+    };
+  }
+}
+</script>
+</body>
+</html>

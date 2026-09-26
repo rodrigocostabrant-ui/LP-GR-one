@@ -1,0 +1,426 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #04060a;
+  --bg2: #080c14;
+  --surf: #0d1320;
+  --ink: #eef1f5;
+  --silver: #b9c1ce;
+  --mute: #7d8697;
+  --blue: #3d6dff;
+  --ice: #afc4ff;
+  --deep: #0a1c4a;
+
+  /* Superfícies claras (cartões Método, "Se você já tem um site", Investimento) */
+  --paper-ink: #0b1220;
+  --paper-text: #4a5468;
+  --paper-mute: #6b7487;
+  --paper-accent: #2f5bea;
+
+  --m: clamp(20px, 4vw, 56px);
+
+  /* As três curvas da especificação — espelhadas em lib/motion/tokens.ts */
+  --ease-entrada: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-transicao: cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-surf: var(--surf);
+  --color-ink: var(--ink);
+  --color-silver: var(--silver);
+  --color-mute: var(--mute);
+  --color-blue: var(--blue);
+  --color-ice: var(--ice);
+  --color-deep: var(--deep);
+  --font-sans: var(--font-archivo);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+/* Sem scroll-behavior: smooth — o Lenis faz a rolagem suave (inclusive das
+   âncoras) e o smooth nativo brigava com ele, travando a navegação. */
+html {
+  background: var(--bg);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("/textura-grao.svg");
+}
+
+/* Em @layer base: fora de camada, `a:hover` venceria o `.gr-btn:hover` (components)
+   e o texto do botão ficava azul-gelo sobre o preenchimento prata. */
+@layer base {
+  a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  @media (hover: hover) {
+    a:hover {
+      color: var(--ice);
+    }
+  }
+}
+
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--ice);
+  outline-offset: 3px;
+}
+
+@media (pointer: fine) {
+  body.gr-cursor,
+  body.gr-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* ── Palco 3D ─────────────────────────────────────────────────────────── */
+
+.gr-stage {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gr-mark-fallback {
+  display: inline-block;
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  background: linear-gradient(100deg, #5b6475 0%, #9aa3b2 22%, #eef2f7 40%, #ffffff 47%, #c4ccd8 54%, #afc4ff 64%, #6b7483 80%, #3e4656 100%);
+  background-size: 320% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gr-mark-sheen 9s var(--ease-transicao) infinite alternate;
+}
+@keyframes gr-mark-sheen {
+  from {
+    background-position: 20% 50%;
+    transform: rotate(-2deg);
+  }
+  to {
+    background-position: 80% 50%;
+    transform: rotate(2deg);
+  }
+}
+
+/* ── Botões (especificação "04 Componentes": passagem 650ms, pressão 0,97) ──
+   Em @layer components para que utilitários (hidden, md:inline-flex) vençam. */
+
+@layer components {
+.gr-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  height: 56px;
+  padding: 0 10px 0 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 222, 235, 0.35);
+  font: 500 15px/1 var(--font-sans);
+  color: var(--ink);
+  white-space: nowrap;
+  background:
+    linear-gradient(var(--ink), var(--ink)) no-repeat left center / 0% 100%,
+    linear-gradient(135deg, rgba(61, 109, 255, 0.35), rgba(255, 255, 255, 0.03));
+  transition:
+    background-size 0.65s var(--ease-transicao),
+    color 0.4s,
+    border-color 0.4s,
+    transform 0.16s var(--ease-entrada),
+    translate 0.3s var(--ease-entrada);
+}
+.gr-btn--ghost {
+  background: linear-gradient(var(--ink), var(--ink)) no-repeat left center / 0% 100%;
+}
+.gr-btn--dark {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--blue), var(--blue)) no-repeat left center / 0% 100%,
+    var(--paper-ink);
+}
+.gr-btn__icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gr-btn--dark .gr-btn__icon {
+  background: var(--ink);
+}
+.gr-btn:active {
+  transform: scale(0.97);
+}
+@media (hover: hover) and (pointer: fine) {
+  .gr-btn:hover {
+    background-size: 100% 100%, 100% 100%;
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .gr-btn--dark:hover {
+    color: #fff;
+    border-color: transparent;
+  }
+}
+}
+
+/* ── Topo ──────────────────────────────────────────────────────────────── */
+
+/* Altura da caixa-alta do "GR" (0,71 do corpo) — espelha heroGlyphPx() em Hero.tsx. */
+/* Desktop/tablet: texto numa coluna à esquerda, "GR" ancorado à direita, sem sobreposição. */
+#inicio {
+  --hero-glyph: calc(0.71 * min(460px, 30vw));
+  justify-content: center;
+}
+.hero-copy {
+  max-width: 52%;
+}
+.hero-l1 {
+  font-size: clamp(20px, 2.2vw, 40px);
+}
+.hero-l3a {
+  font-size: clamp(38px, 4.8vw, 96px);
+}
+.hero-l3b {
+  font-size: clamp(26px, 3.3vw, 64px);
+}
+.hero-mark,
+.hero-mark-halo {
+  left: 76%;
+  top: 52%;
+}
+.hero-mark {
+  width: min(100vw, calc(var(--hero-glyph) * 3.4));
+  height: calc(var(--hero-glyph) * 2.6);
+}
+.hero-word {
+  font-size: clamp(46px, 6.4vw, 128px);
+  font-variation-settings: "wdth" 106;
+}
+@media (max-width: 1099px) {
+  #inicio {
+    --hero-glyph: calc(0.71 * 29vw);
+  }
+  .hero-mark,
+  .hero-mark-halo {
+    left: 75%;
+  }
+  .hero-word {
+    font-variation-settings: "wdth" 92;
+  }
+}
+@media (max-width: 759px) {
+  #inicio {
+    --hero-glyph: calc(0.71 * 56vw);
+    justify-content: flex-end;
+  }
+  .hero-copy {
+    max-width: none;
+  }
+  .hero-l1 {
+    font-size: 22px;
+  }
+  .hero-l3a {
+    font-size: 42px;
+  }
+  .hero-l3b {
+    font-size: 30px;
+  }
+  .hero-mark,
+  .hero-mark-halo {
+    left: 50%;
+    top: 30%;
+  }
+  .hero-word {
+    font-size: clamp(46px, 10.2vw, 206px);
+    font-variation-settings: "wdth" 76;
+  }
+}
+@media (hover: hover) {
+  .hero-link:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+}
+
+@keyframes gr-scroll-dot {
+  from {
+    transform: translateY(-18px);
+  }
+  to {
+    transform: translateY(52px);
+  }
+}
+.gr-scroll-dot {
+  animation: gr-scroll-dot 1.67s linear infinite;
+}
+
+/* ── Encerramento: corpo do "GR" (espelha finGlyphPx em Contato.tsx) ────── */
+
+.fin-mark-slot {
+  --fin-body: min(300px, 20vw);
+  height: calc(var(--fin-body) * 0.82);
+}
+@media (max-width: 759px) {
+  .fin-mark-slot {
+    --fin-body: 42vw;
+  }
+}
+
+/* ── Manifesto: fixo por 340vh; em movimento reduzido, composição estática ── */
+
+.mf-section {
+  position: relative;
+  height: 340vh;
+}
+.mf-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mf-question {
+  position: absolute;
+  top: 18vh;
+  left: var(--m);
+  right: var(--m);
+  text-align: center;
+  opacity: 0;
+}
+.mf-wireframe > * {
+  opacity: 0;
+}
+
+/* ── Processo: trilho horizontal só no computador e com movimento ─────── */
+
+.proc-track {
+  display: none;
+}
+@media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
+  .proc-track {
+    display: block;
+  }
+  .proc-list {
+    display: none;
+  }
+}
+
+/* ── Antes e depois ─────────────────────────────────────────────────────── */
+
+.ba-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9.4;
+  border-radius: 16px;
+}
+.ba-mob {
+  display: none;
+}
+@media (max-width: 759px) {
+  .ba-frame {
+    width: min(100%, 360px);
+    aspect-ratio: 9 / 16;
+    border-radius: 26px;
+  }
+  .ba-desk {
+    display: none;
+  }
+  .ba-mob {
+    display: flex;
+  }
+}
+.ba-handle {
+  background: rgba(4, 6, 10, 0.55);
+  transition:
+    scale 0.25s var(--ease-entrada),
+    background 0.25s;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ba-handle:hover {
+    scale: 1.08;
+    background: rgba(61, 109, 255, 0.6);
+  }
+}
+.ba-handle:active {
+  scale: 0.95;
+}
+
+/* ── Movimento reduzido: sem deslocamento, só opacidade em 400ms ───────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 400ms !important;
+  }
+  .mf-section {
+    height: auto;
+  }
+  .mf-sticky {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 6vh;
+    padding: 18vh 0 14vh;
+  }
+  .mf-question {
+    position: static;
+    opacity: 1;
+  }
+  .mf-wireframe {
+    display: none;
+  }
+  .gr-scroll-dot {
+    display: none;
+  }
+}

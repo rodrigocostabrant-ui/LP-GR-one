@@ -1,0 +1,149 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { site } from "@/content/site";
+import GRSignature from "@/components/three/GRSignature";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import type { GRState } from "@/components/three/GRObject";
+
+// Quadros-chave dos 5 estados do objeto (idênticos ao script original).
+const KEYFRAMES: GRState[] = [
+  { a: 0, b: 0, rx: -6, ry: -18 },
+  { a: 0.2, b: 0, rx: 12, ry: 150 },
+  { a: 1, b: 0, rx: -8, ry: 200 },
+  { a: 0, b: 1, rx: -22, ry: 395 },
+  { a: 0, b: 0, rx: -4, ry: 360 },
+];
+
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
+}
+
+function interpolate(progress: number): GRState {
+  const n = KEYFRAMES.length - 1;
+  const scaled = Math.min(Math.max(progress, 0), 1) * n;
+  const i = Math.min(Math.floor(scaled), n - 1);
+  const t = scaled - i;
+  const from = KEYFRAMES[i];
+  const to = KEYFRAMES[i + 1];
+  return {
+    a: lerp(from.a, to.a, t),
+    b: lerp(from.b, to.b, t),
+    rx: lerp(from.rx, to.rx, t),
+    ry: lerp(from.ry, to.ry, t),
+  };
+}
+
+export default function Assinatura() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const stateRef = useRef<GRState>(KEYFRAMES[0]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: (self) => {
+          stateRef.current = interpolate(self.progress);
+          setActiveIndex(Math.min(Math.round(self.progress * (KEYFRAMES.length - 1)), KEYFRAMES.length - 1));
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={sectionRef} style={{ position: "relative", height: "440vh", background: "var(--bg)" }}>
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          overflow: "hidden",
+          display: "flex",
+          flexWrap: "wrap-reverse",
+          alignItems: "center",
+          alignContent: "center",
+          padding: "0 var(--m)",
+          gap: "4vh 4vw",
+        }}
+      >
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 45% 55% at 66% 50%, rgba(61,109,255,.2), transparent 70%)",
+          }}
+        />
+        <div style={{ position: "relative", zIndex: 2, flex: "1 1 380px", display: "flex", flexDirection: "column", gap: "clamp(18px,3vh,32px)", maxWidth: 560 }}>
+          <span style={{ font: "400 11px/1 var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--mute)" }}>
+            {site.assinatura.eyebrow}
+          </span>
+          <h2 style={{ margin: 0, display: "flex", flexDirection: "column" }}>
+            <span style={{ font: "700 clamp(32px,4.4vw,80px)/.95 var(--font-sans)", fontVariationSettings: "'wdth' 88", letterSpacing: "-.04em" }}>
+              {site.assinatura.tituloLinha1}
+            </span>
+            <span style={{ font: "italic 400 clamp(36px,5vw,90px)/1 var(--font-serif)", color: "var(--silver)" }}>
+              {site.assinatura.tituloItalico}
+            </span>
+          </h2>
+          <p className="hidden md:block" style={{ margin: 0, maxWidth: 400, font: "400 15px/1.6 var(--font-sans)", color: "var(--silver)" }}>
+            {site.assinatura.paragrafo}
+          </p>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {site.assinatura.estados.map((e, i) => {
+              const isActive = i === activeIndex;
+              return (
+                <div
+                  key={e.n}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "36px minmax(0,1fr)",
+                    gap: 12,
+                    alignItems: "baseline",
+                    padding: isActive ? "18px 0" : "10px 0",
+                    borderTop: "1px solid rgba(214,222,235,.1)",
+                    opacity: isActive ? 1 : 0.45,
+                    transition: "opacity .5s, padding .5s",
+                  }}
+                >
+                  <span style={{ font: "400 11px/1 var(--font-mono)", color: isActive ? "var(--ice)" : "var(--mute)" }}>{e.n}</span>
+                  <span style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "4px 16px" }}>
+                    <span style={{ font: "600 clamp(15px,1.3vw,19px)/1.2 var(--font-sans)" }}>{e.titulo}</span>
+                    <span style={{ font: "400 13px/1.4 var(--font-sans)", color: "var(--mute)" }}>{e.descricao}</span>
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div style={{ position: "relative", zIndex: 1, flex: "1 1 420px", display: "flex", alignItems: "center", justifyContent: "center", minHeight: "36vh" }}>
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: "50%",
+              bottom: "6%",
+              width: "60%",
+              height: 1,
+              transform: "translateX(-50%)",
+              background: "linear-gradient(90deg,transparent,rgba(175,196,255,.35),transparent)",
+            }}
+          />
+          <div style={{ width: "min(70vw,480px)", height: "min(70vw,480px)" }}>
+            <GRSignature stateRef={stateRef} size={1.8} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

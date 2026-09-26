@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#04060A;color:#EEF1F5;-webkit-font-smoothing:antialiased}
+a{color:#AFC4FF;text-decoration:none}
+a:hover{color:#EEF1F5}
+*:focus-visible{outline:2px solid #AFC4FF;outline-offset:3px}
+</style>
+</helmet>
+<div data-screen-label="GR One — Especificação" style="--m:clamp(20px,4vw,64px);--sans:'Archivo',sans-serif;--serif:'Instrument Serif',serif;--mono:'JetBrains Mono',monospace;font-family:var(--sans);background:#04060A;color:#EEF1F5;padding:0 var(--m) 120px">
+<div style="max-width:1400px;margin:0 auto">
+
+<header data-screen-label="00 Capa" style="min-height:78vh;display:flex;flex-direction:column;justify-content:space-between;padding:48px 0 72px;background:radial-gradient(ellipse 50% 60% at 80% 40%,rgba(61,109,255,.2),transparent 70%)">
+  <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697"><span>GR One — especificação de design v1.0</span><a href="GR One Landing.dc.html">Abrir protótipo navegável →</a></div>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:40px">
+    <h1 style="margin:0;display:flex;flex-direction:column">
+      <span style="font:800 clamp(56px,10vw,170px)/.88 var(--sans);font-variation-settings:'wdth' 108;letter-spacing:-.05em;background:linear-gradient(180deg,#fff,#7E8797);-webkit-background-clip:text;background-clip:text;color:transparent">SISTEMA</span>
+      <span style="font:italic 400 clamp(52px,8.6vw,150px)/1 var(--serif);color:#B9C1CE">e especificação.</span>
+    </h1>
+    <div style="position:relative">{{ coverMark }}</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;font:400 14px/1.6 var(--sans);color:#B9C1CE">
+    <span><b style="color:#EEF1F5;font-weight:600">Produto</b><br>Landing pages premium para serviços locais de alto ticket.</span>
+    <span><b style="color:#EEF1F5;font-weight:600">Ação única</b><br>Conversa no WhatsApp, repetida no topo, no fim e na barra fixa do celular.</span>
+    <span><b style="color:#EEF1F5;font-weight:600">Tom</b><br>Contemporâneo, direto, sem jargão. Nenhum número, cliente ou depoimento inventado.</span>
+    <span><b style="color:#EEF1F5;font-weight:600">Pilha prevista</b><br>Next.js + Vercel. 3D em WebGL, com alternativa leve no celular.</span>
+  </div>
+</header>
+
+<nav aria-label="Índice" style="display:flex;flex-wrap:wrap;gap:10px 28px;padding:28px 0;border-top:1px solid rgba(214,222,235,.12);border-bottom:1px solid rgba(214,222,235,.12);font:400 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase">
+  <a href="#cores">01 Cores</a><a href="#tipo">02 Tipografia</a><a href="#grid">03 Grid</a><a href="#comp">04 Componentes</a><a href="#motion">05 Movimento</a><a href="#obj">06 Objeto 3D</a><a href="#resp">07 Responsivo</a><a href="#conceitos">08 Conceitos</a><a href="#assets">09 Assets</a><a href="#impl">10 Implementação</a><a href="#revisao">11 Revisão</a>
+</nav>
+
+<section id="cores" data-screen-label="01 Cores" style="padding:110px 0 0;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">01</span>Cores</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">Preto azulado como palco, prata como matéria, azul como única cor de ação. Gradientes existem apenas dentro dessa família — nunca neon, nunca multicolor.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px">
+    <sc-for list="{{ colors }}" as="c" hint-placeholder-count="12">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="height:120px;border-radius:10px;background:{{ c.v }};border:1px solid rgba(214,222,235,.12)"></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font:600 14px/1.2 var(--sans)">{{ c.n }}</span><span style="font:400 11px/1.4 var(--mono);color:#AFC4FF">{{ c.h }}</span><span style="font:400 12px/1.5 var(--sans);color:#7D8697">{{ c.u }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="height:90px;border-radius:10px;background:linear-gradient(180deg,#FFFFFF 12%,#CDD4DE 52%,#6F7888 100%)"></div><span style="font:400 12px/1.5 var(--mono);color:#B9C1CE">Prata vertical — títulos de impacto (texto recortado)</span></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="height:90px;border-radius:10px;background:linear-gradient(100deg,#5B6475 0%,#9AA3B2 22%,#EEF2F7 40%,#FFFFFF 47%,#C4CCD8 54%,#AFC4FF 64%,#6B7483 80%,#3E4656 100%)"></div><span style="font:400 12px/1.5 var(--mono);color:#B9C1CE">Reflexo metálico — face do objeto 3D (posição móvel)</span></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="height:90px;border-radius:10px;background:radial-gradient(ellipse 70% 90% at 70% 40%,rgba(61,109,255,.55),transparent 70%),#04060A"></div><span style="font:400 12px/1.5 var(--mono);color:#B9C1CE">Luz ambiente azul — atrás do objeto e no CTA final</span></div>
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="height:90px;border-radius:10px;background:linear-gradient(135deg,rgba(61,109,255,.35),rgba(255,255,255,.03)),#04060A;border:1px solid rgba(214,222,235,.35)"></div><span style="font:400 12px/1.5 var(--mono);color:#B9C1CE">Vidro azul — botão primário em repouso</span></div>
+  </div>
+  <p style="margin:0;font:400 13px/1.6 var(--mono);color:#7D8697">Contraste: tinta #EEF1F5 sobre #04060A = 18:1 · prata #B9C1CE = 11:1 · névoa #7D8697 = 5,3:1 (legendas). Azul #3D6DFF nunca carrega texto corrido — só ícones, linhas e fundos de botão.</p>
+</section>
+
+<section id="tipo" data-screen-label="02 Tipografia" style="padding:130px 0 0;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">02</span>Tipografia</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">Archivo variável (eixos de peso e largura) é a voz da marca — a largura muda com o scroll. Instrument Serif itálica aparece só na segunda linha de cada título, como contraponto. JetBrains Mono para índices e legendas técnicas.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+    <div style="padding:28px;border-radius:12px;background:#080C14;border:1px solid rgba(214,222,235,.1);display:flex;flex-direction:column;gap:14px"><span style="font:800 88px/1 var(--sans);font-variation-settings:'wdth' 112;letter-spacing:-.05em">Aa</span><span style="font:600 16px var(--sans)">Archivo — principal</span><span style="font:400 13px/1.5 var(--sans);color:#7D8697">Pesos 200 · 300 · 400 · 500 · 700 · 800 · 900. Largura 68–125.</span></div>
+    <div style="padding:28px;border-radius:12px;background:#080C14;border:1px solid rgba(214,222,235,.1);display:flex;flex-direction:column;gap:14px"><span style="font:italic 400 88px/1 var(--serif)">Aa</span><span style="font:600 16px var(--sans)">Instrument Serif — contraponto</span><span style="font:400 13px/1.5 var(--sans);color:#7D8697">Itálica 400. No máximo uma ocorrência por bloco.</span></div>
+    <div style="padding:28px;border-radius:12px;background:#080C14;border:1px solid rgba(214,222,235,.1);display:flex;flex-direction:column;gap:14px"><span style="font:400 88px/1 var(--mono);letter-spacing:-.04em">Aa</span><span style="font:600 16px var(--sans)">JetBrains Mono — legendas</span><span style="font:400 13px/1.5 var(--sans);color:#7D8697">400/500, 10–12px, caixa alta, entreletra 0,12–0,2em.</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column">
+    <sc-for list="{{ typeScale }}" as="s" hint-placeholder-count="9">
+      <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr) minmax(160px,260px);gap:24px;align-items:baseline;padding:22px 0;border-top:1px solid rgba(214,222,235,.1)">
+        <span style="font:400 11px/1.4 var(--mono);letter-spacing:.12em;color:#7D8697;text-transform:uppercase">{{ s.n }}</span>
+        <span style="font:{{ s.f }};font-variation-settings:{{ s.v }};letter-spacing:{{ s.ls }};color:#EEF1F5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.ex }}</span>
+        <span style="font:400 11px/1.5 var(--mono);color:#AFC4FF">{{ s.spec }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="grid" data-screen-label="03 Grid e espaçamento" style="padding:130px 0 0;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">03</span>Grid e espaçamento</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">Doze colunas no computador, oito no tablet, quatro no celular. O conteúdo encosta à esquerda; o lado direito respira. Seções separadas por espaço, nunca por caixas.</p></div>
+  <div style="position:relative;height:220px;border-radius:12px;background:#080C14;border:1px solid rgba(214,222,235,.1);padding:0 48px;display:grid;grid-template-columns:repeat(12,1fr);gap:24px">
+    <sc-for list="{{ cols }}" as="c" hint-placeholder-count="12"><div style="background:rgba(61,109,255,.12);border-left:1px solid rgba(175,196,255,.25);border-right:1px solid rgba(175,196,255,.25)"></div></sc-for>
+    <span style="position:absolute;left:16px;bottom:12px;font:400 11px var(--mono);color:#AFC4FF">margem clamp(20px, 4vw, 56px) · calha 24px · largura máx. 1560px (textos 1180px)</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+    <sc-for list="{{ spacing }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1px solid rgba(214,222,235,.12)"><span style="font:600 15px var(--sans)">{{ s.n }}</span><span style="font:400 12px/1.6 var(--mono);color:#AFC4FF">{{ s.v }}</span><span style="font:400 13px/1.6 var(--sans);color:#7D8697">{{ s.d }}</span></div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="comp" data-screen-label="04 Componentes e estados" style="padding:130px 0 0;display:flex;flex-direction:column;gap:48px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">04</span>Componentes e estados</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">Poucos componentes, sempre os mesmos. Todos os estados abaixo são estáticos para referência — no protótipo eles são vivos.</p></div>
+
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <span style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">Botão primário — "Falar com os sócios"</span>
+    <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end">
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 10px 0 26px;border-radius:999px;border:1px solid rgba(214,222,235,.35);font:500 15px/1 var(--sans);background:linear-gradient(135deg,rgba(61,109,255,.35),rgba(255,255,255,.03))">Falar com os sócios<span style="width:36px;height:36px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></span><span style="font:400 11px var(--mono);color:#7D8697">Normal</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 10px 0 26px;border-radius:999px;border:1px solid #EEF1F5;font:500 15px/1 var(--sans);color:#04060A;background:linear-gradient(90deg,#EEF1F5 62%,rgba(61,109,255,.35) 62%)">Falar com os sócios<span style="width:36px;height:36px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></span><span style="font:400 11px var(--mono);color:#7D8697">Passagem (preenchimento avançando)</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 10px 0 26px;border-radius:999px;border:1px solid #EEF1F5;font:500 15px/1 var(--sans);color:#04060A;background:#EEF1F5;transform:scale(.97)">Falar com os sócios<span style="width:36px;height:36px;border-radius:50%;background:#2B55D9;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></span><span style="font:400 11px var(--mono);color:#7D8697">Pressionado (escala 0,97)</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 10px 0 26px;border-radius:999px;border:1px solid rgba(214,222,235,.35);font:500 15px/1 var(--sans);background:linear-gradient(135deg,rgba(61,109,255,.35),rgba(255,255,255,.03));outline:2px solid #AFC4FF;outline-offset:3px">Falar com os sócios<span style="width:36px;height:36px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></span><span style="font:400 11px var(--mono);color:#7D8697">Foco (teclado)</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 10px 0 26px;border-radius:999px;border:1px solid rgba(214,222,235,.35);font:500 15px/1 var(--sans);opacity:.4">Falar com os sócios<span style="width:36px;height:36px;border-radius:50%;background:#3D6DFF;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="#fff" stroke-width="1.4"></path></svg></span></span><span style="font:400 11px var(--mono);color:#7D8697">Desabilitado (40%)</span></div>
+    </div>
+    <p style="margin:0;max-width:760px;font:400 13px/1.6 var(--sans);color:#7D8697">Passagem: o fundo prata avança da esquerda em 650ms (curva expressiva) e o texto inverte para preto. Atração magnética: o botão desloca até 18% da distância do cursor. Alturas: 42 (cabeçalho), 56 (padrão), 64 (encerramento).</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <span style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">Navegação em cápsula</span>
+      <div style="display:inline-flex;align-self:flex-start;gap:4px;padding:5px;border:1px solid rgba(214,222,235,.12);border-radius:999px;background:rgba(13,19,32,.6)"><span style="padding:9px 18px;border-radius:999px;background:#EEF1F5;color:#04060A;font:500 13px var(--sans)">Início</span><span style="padding:9px 18px;font:500 13px var(--sans);color:#EEF1F5">Criação</span><span style="padding:9px 18px;font:500 13px var(--sans);color:#B9C1CE">Processo</span><span style="padding:9px 18px;font:500 13px var(--sans);color:#B9C1CE">Contato</span></div>
+      <span style="font:400 12px/1.6 var(--sans);color:#7D8697">Selecionado = cápsula prata (segue a seção visível) · passagem = texto branco · normal = prata. Celular: botão "Menu" abre tela cheia.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <span style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">Controle de categorias</span>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+        <div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 14px var(--sans)">Imobiliária</span><span style="height:1px;background:linear-gradient(90deg,#3D6DFF,#AFC4FF 60%,rgba(214,222,235,.14) 60%)"></span><span style="font:400 10px var(--mono);color:#AFC4FF">selecionado</span></div>
+        <div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 14px var(--sans);color:#EEF1F5">Clínica</span><span style="height:1px;background:rgba(214,222,235,.3)"></span><span style="font:400 10px var(--mono);color:#7D8697">passagem</span></div>
+        <div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 14px var(--sans);color:#7D8697">Arquitetura</span><span style="height:1px;background:rgba(214,222,235,.14)"></span><span style="font:400 10px var(--mono);color:#7D8697">normal</span></div>
+        <div style="display:flex;flex-direction:column;gap:12px;opacity:.4"><span style="font:600 14px var(--sans);color:#7D8697">Turismo</span><span style="height:1px;background:rgba(214,222,235,.14)"></span><span style="font:400 10px var(--mono);color:#7D8697">desabilitado</span></div>
+      </div>
+      <span style="font:400 12px/1.6 var(--sans);color:#7D8697">A linha azul é também o cronômetro: avança em 8s e troca sozinha; pausa quando o cursor está sobre a vitrine.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <span style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">Cursor</span>
+      <div style="display:flex;gap:28px;align-items:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div style="position:relative;width:38px;height:38px;border-radius:50%;border:1px solid rgba(238,241,245,.45)"><span style="position:absolute;left:16px;top:16px;width:6px;height:6px;border-radius:50%;background:#EEF1F5"></span></div><span style="font:400 10px var(--mono);color:#7D8697">repouso</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div style="width:58px;height:58px;border-radius:50%;border:1px solid rgba(175,196,255,.8)"></div><span style="font:400 10px var(--mono);color:#7D8697">link</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div style="width:86px;height:86px;border-radius:50%;background:#EEF1F5;color:#04060A;display:flex;align-items:center;justify-content:center;font:500 9px var(--mono);letter-spacing:.14em">ARRASTAR</div><span style="font:400 10px var(--mono);color:#7D8697">com rótulo</span></div>
+      </div>
+      <span style="font:400 12px/1.6 var(--sans);color:#7D8697">Ponto segue o mouse sem atraso (modo diferença); anel segue com amortecimento de 0,2. Rótulos: Conversar, Ver, Arrastar. Desligado em telas de toque.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <span style="font:400 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#7D8697">Comparador antes e depois</span>
+      <div style="display:flex;gap:24px;align-items:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div style="width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:rgba(4,6,10,.55);display:flex;align-items:center;justify-content:center"><svg width="22" height="12" viewBox="0 0 22 12" fill="none"><path d="M6 1L1 6L6 11M16 1L21 6L16 11" stroke="#EEF1F5" stroke-width="1.3"></path></svg></div><span style="font:400 10px var(--mono);color:#7D8697">normal</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div style="width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:rgba(61,109,255,.6);transform:scale(1.08);display:flex;align-items:center;justify-content:center"><svg width="22" height="12" viewBox="0 0 22 12" fill="none"><path d="M6 1L1 6L6 11M16 1L21 6L16 11" stroke="#EEF1F5" stroke-width="1.3"></path></svg></div><span style="font:400 10px var(--mono);color:#7D8697">passagem</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div style="width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:rgba(4,6,10,.55);outline:2px solid #AFC4FF;outline-offset:3px;display:flex;align-items:center;justify-content:center"><svg width="22" height="12" viewBox="0 0 22 12" fill="none"><path d="M6 1L1 6L6 11M16 1L21 6L16 11" stroke="#EEF1F5" stroke-width="1.3"></path></svg></div><span style="font:400 10px var(--mono);color:#7D8697">foco</span></div>
+      </div>
+      <span style="font:400 12px/1.6 var(--sans);color:#7D8697">Arraste em qualquer ponto da imagem · setas do teclado ±5% · Início/Fim. No toque, rolagem vertical preservada.</span>
+    </div>
+  </div>
+</section>
+
+<section id="motion" data-screen-label="05 Movimento" style="padding:130px 0 0;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">05</span>Direção de movimento</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">Três curvas, nada além delas. O scroll dirige a narrativa; o cursor dá vida; o tempo só respira (flutuação lenta).</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+    <div style="padding:22px;border-radius:12px;background:#080C14;border:1px solid rgba(214,222,235,.1);display:flex;flex-direction:column;gap:8px"><span style="font:600 15px var(--sans)">Entrada</span><span style="font:400 12px var(--mono);color:#AFC4FF">cubic-bezier(.16, 1, .3, 1) · 1100–1300ms</span><span style="font:400 13px/1.5 var(--sans);color:#7D8697">Revelações de texto e blocos. Desacelera longamente — sensação de peso.</span></div>
+    <div style="padding:22px;border-radius:12px;background:#080C14;border:1px solid rgba(214,222,235,.1);display:flex;flex-direction:column;gap:8px"><span style="font:600 15px var(--sans)">Transição</span><span style="font:400 12px var(--mono);color:#AFC4FF">cubic-bezier(.77, 0, .18, 1) · 650–1200ms</span><span style="font:400 13px/1.5 var(--sans);color:#7D8697">Máscaras entre conceitos e preenchimento de botões. Simétrica e decidida.</span></div>
+    <div style="padding:22px;border-radius:12px;background:#080C14;border:1px solid rgba(214,222,235,.1);display:flex;flex-direction:column;gap:8px"><span style="font:600 15px var(--sans)">Acompanhamento</span><span style="font:400 12px var(--mono);color:#AFC4FF">interpolação 0,06–0,2 por quadro</span><span style="font:400 13px/1.5 var(--sans);color:#7D8697">Cursor, objeto 3D e paralaxe. Nunca instantâneo, nunca elástico.</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column">
+    <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,1.6fr) minmax(0,1.6fr) minmax(0,1.2fr);gap:20px;padding:12px 0;font:400 10px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7D8697"><span>Seção</span><span>Gatilho e comportamento</span><span>Transformação</span><span>Celular</span></div>
+    <sc-for list="{{ motion }}" as="m" hint-placeholder-count="9">
+      <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,1.6fr) minmax(0,1.6fr) minmax(0,1.2fr);gap:20px;padding:18px 0;border-top:1px solid rgba(214,222,235,.1);font:400 13px/1.55 var(--sans);color:#B9C1CE">
+        <span style="font:600 14px/1.3 var(--sans);color:#EEF1F5">{{ m.s }}</span><span>{{ m.g }}</span><span style="font:400 12px/1.6 var(--mono);color:#AFC4FF">{{ m.t }}</span><span style="color:#7D8697">{{ m.m }}</span>
+      </div>
+    </sc-for>
+  </div>
+  <p style="margin:0;font:400 13px/1.6 var(--sans);color:#7D8697">Movimento reduzido (preferência do sistema): desligar fragmentação, paralaxe e troca automática; manter apenas opacidade em 400ms.</p>
+</section>
+
+<section id="obj" data-screen-label="06 Objeto 3D" style="padding:130px 0 0;display:flex;flex-direction:column;gap:48px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">06</span>Objeto 3D — a assinatura</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">Um único objeto percorre a página e conta o método: inteiro, desmontado, reorganizado, inteiro de novo. Nunca aparece um segundo objeto diferente.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+    <sc-for list="{{ states }}" as="s" hint-placeholder-count="5">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="position:relative;height:220px;border-radius:12px;background:radial-gradient(closest-side,rgba(61,109,255,.22),transparent),#080C14;border:1px solid rgba(214,222,235,.1);display:flex;align-items:center;justify-content:center;overflow:hidden">{{ s.el }}</div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 11px var(--mono);letter-spacing:.14em;color:#AFC4FF">ESTADO {{ s.n }}</span><span style="font:600 16px var(--sans)">{{ s.t }}</span><span style="font:400 13px/1.5 var(--sans);color:#7D8697">{{ s.d }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 56px">
+    <sc-for list="{{ objSpec }}" as="o" hint-placeholder-count="10">
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid rgba(214,222,235,.1)"><span style="font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#7D8697">{{ o.k }}</span><span style="font:400 14px/1.55 var(--sans);color:#B9C1CE">{{ o.v }}</span></div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="resp" data-screen-label="07 Responsivo" style="padding:130px 0 0;display:flex;flex-direction:column;gap:48px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">07</span>Computador, tablet, celular</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">As três janelas abaixo são o mesmo protótipo, vivo, em larguras reais. Role dentro de cada uma.</p></div>
+  <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:12px"><span style="font:400 11px var(--mono);letter-spacing:.14em;color:#7D8697">COMPUTADOR — 1440 × 900 (exibido a 50%)</span><div style="width:720px;height:450px;overflow:hidden;border-radius:12px;border:1px solid rgba(214,222,235,.14)"><iframe src="GR One Landing.dc.html" title="Computador" style="width:1440px;height:900px;border:0;transform:scale(.5);transform-origin:0 0"></iframe></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><span style="font:400 11px var(--mono);letter-spacing:.14em;color:#7D8697">TABLET — 834 × 1112 (50%)</span><div style="width:417px;height:556px;overflow:hidden;border-radius:18px;border:1px solid rgba(214,222,235,.14)"><iframe src="GR One Landing.dc.html" title="Tablet" style="width:834px;height:1112px;border:0;transform:scale(.5);transform-origin:0 0"></iframe></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><span style="font:400 11px var(--mono);letter-spacing:.14em;color:#7D8697">CELULAR — 390 × 844 (70%)</span><div style="width:273px;height:591px;overflow:hidden;border-radius:30px;border:1px solid rgba(214,222,235,.14)"><iframe src="GR One Landing.dc.html" title="Celular" style="width:390px;height:844px;border:0;transform:scale(.7);transform-origin:0 0"></iframe></div></div>
+  </div>
+  <div style="display:flex;flex-direction:column">
+    <div style="display:grid;grid-template-columns:minmax(120px,1fr) repeat(3,minmax(0,1.4fr));gap:20px;padding:12px 0;font:400 10px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7D8697"><span>Elemento</span><span>Computador ≥ 1100</span><span>Tablet 760–1099</span><span>Celular &lt; 760</span></div>
+    <sc-for list="{{ resp }}" as="r" hint-placeholder-count="9">
+      <div style="display:grid;grid-template-columns:minmax(120px,1fr) repeat(3,minmax(0,1.4fr));gap:20px;padding:16px 0;border-top:1px solid rgba(214,222,235,.1);font:400 13px/1.55 var(--sans);color:#B9C1CE"><span style="font:600 14px/1.3 var(--sans);color:#EEF1F5">{{ r.e }}</span><span>{{ r.d }}</span><span>{{ r.t }}</span><span>{{ r.m }}</span></div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="conceitos" data-screen-label="08 Conceitos" style="padding:130px 0 0;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">08</span>Exemplos conceituais</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">Quatro identidades distintas, um tratamento fotográfico comum: preto e branco, contraste +8–12%, véu azul #2448A8 em modo cor a 40%. Todas as marcas são fictícias e sinalizadas como tal.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+    <sc-for list="{{ concepts }}" as="c" hint-placeholder-count="4">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="position:relative;aspect-ratio:4 / 3;border-radius:10px;overflow:hidden;background:#0A0E16"><div role="img" aria-label="{{ c.alt }}" style="position:absolute;inset:0;background-image:{{ c.bg }};background-size:cover;background-position:center;filter:grayscale(1) contrast(1.1) brightness(.85)"></div><div style="position:absolute;inset:0;background:#2448A8;mix-blend-mode:color;opacity:.42"></div><span style="position:absolute;left:14px;bottom:14px;font:{{ c.f }};color:#EEF1F5">{{ c.brand }}</span></div>
+        <span style="font:400 11px var(--mono);letter-spacing:.14em;color:#AFC4FF">{{ c.seg }}</span>
+        <span style="font:400 13px/1.6 var(--sans);color:#B9C1CE">{{ c.d }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="assets" data-screen-label="09 Assets" style="padding:130px 0 0;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">09</span>Assets</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">O que já é definitivo e o que é apenas conceitual neste protótipo.</p></div>
+  <div style="display:flex;flex-direction:column">
+    <sc-for list="{{ assets }}" as="a" hint-placeholder-count="8">
+      <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2.4fr) 130px;gap:20px;align-items:baseline;padding:16px 0;border-top:1px solid rgba(214,222,235,.1)"><span style="font:600 14px var(--sans)">{{ a.n }}</span><span style="font:400 13px/1.55 var(--sans);color:#B9C1CE">{{ a.d }}</span><span style="justify-self:start;padding:5px 10px;border-radius:999px;font:500 10px/1 var(--mono);letter-spacing:.12em;color:{{ a.c }};border:1px solid {{ a.c }}">{{ a.s }}</span></div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="impl" data-screen-label="10 Implementação" style="padding:130px 0 0;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px"><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">10</span>Implementação</h2><p style="margin:0;max-width:440px;font:400 15px/1.6 var(--sans);color:#B9C1CE">Como cada peça complexa deve funcionar em Next.js. Sem código — só comportamento.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:36px 56px">
+    <sc-for list="{{ impl }}" as="i" hint-placeholder-count="9">
+      <div style="display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1px solid rgba(214,222,235,.12)"><span style="font:600 17px/1.3 var(--sans)">{{ i.t }}</span><span style="font:400 14px/1.6 var(--sans);color:#B9C1CE">{{ i.d }}</span></div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="revisao" data-screen-label="11 Revisão crítica" style="padding:130px 0 0;display:flex;flex-direction:column;gap:40px">
+  <h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.95 var(--sans);font-variation-settings:'wdth' 90;letter-spacing:-.04em"><span style="font:400 12px var(--mono);letter-spacing:.14em;color:#7D8697;display:block;margin-bottom:18px">11</span>Revisão crítica</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 56px">
+    <sc-for list="{{ review }}" as="q" hint-placeholder-count="10">
+      <div style="display:flex;flex-direction:column;gap:6px;padding:18px 0;border-top:1px solid rgba(214,222,235,.1)"><span style="font:600 15px/1.4 var(--sans)">{{ q.q }}</span><span style="font:400 13px/1.6 var(--sans);color:#B9C1CE">{{ q.a }}</span></div>
+    </sc-for>
+  </div>
+</section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const FR=[[-.24,-.12,.38,-24,-5],[.18,-.04,-.22,15,3],[-.12,.05,.5,-11,-2],[.28,.13,-.32,26,6]];
+const SILVER='linear-gradient(100deg,#5B6475 0%,#9AA3B2 22%,#EEF2F7 40%,#FFFFFF 47%,#C4CCD8 54%,#AFC4FF 64%,#6B7483 80%,#3E4656 100%)';
+const U=id=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=900&q=80`;
+function buildMark(S,st,key){const h=React.createElement;const L=10,d=S*.011,cuts=[0,32,50,68,100];
+  const base={position:'absolute',left:0,top:0,width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'Archivo',sans-serif",fontWeight:800,fontVariationSettings:"'wdth' 112",fontSize:S+'px',lineHeight:.82,letterSpacing:'-0.05em',whiteSpace:'nowrap'};
+  const slices=[];for(let s=0;s<4;s++){const clip=`inset(${cuts[s]}% -10% ${100-cuts[s+1]}% -10%)`;const kids=[];
+    for(let l=L;l>=1;l--){const t=l/L;kids.push(h('span',{key:l,style:Object.assign({},base,{clipPath:clip,color:l===1?'#9FB3E6':`hsl(222 ${16-t*6}% ${58-t*47}%)`,transform:`translateZ(${-l*d}px)`})},'GR'));}
+    kids.push(h('span',{key:'f',style:Object.assign({},base,{clipPath:clip,backgroundImage:SILVER,backgroundSize:'320% 100%',backgroundPosition:`${50+Math.sin(st.ry*Math.PI/180)*42+st.a*FR[s][3]*.8}% 50%`,WebkitBackgroundClip:'text',backgroundClip:'text',color:'transparent',WebkitTextFillColor:'transparent'})},'GR'));
+    const A=FR[s],a=st.a,b=st.b,e=s-1.5;
+    slices.push(h('div',{key:s,style:{position:'absolute',inset:0,transformStyle:'preserve-3d',transform:`translate3d(${a*A[0]*S}px,${(a*A[1]+b*e*.1)*S}px,${(a*A[2]-b*e*.22)*S}px) rotateY(${a*A[3]}deg) rotateZ(${a*A[4]}deg)`}},kids));}
+  return h('div',{key,style:{position:'relative',width:S*1.42+'px',height:S*.82+'px',perspective:S*4.5+'px'}},h('div',{style:{position:'absolute',inset:0,transformStyle:'preserve-3d',transform:`rotateX(${st.rx}deg) rotateY(${st.ry}deg)`}},slices));}
+
+class Component extends DCLogic {
+  renderVals(){
+    if(!this.cache){
+      const st=[{a:0,b:0,rx:-8,ry:-20},{a:.2,b:0,rx:12,ry:140},{a:1,b:0,rx:-8,ry:-10},{a:0,b:1,rx:-22,ry:35},{a:0,b:0,rx:-4,ry:12}];
+      this.cache={cover:buildMark(170,{a:.35,b:0,rx:-10,ry:-24},'c'),states:st.map((s,i)=>buildMark(96,s,'s'+i))};
+    }
+    const T=['Inteira','Em movimento','Fragmentada','Reorganizada','Inteira de novo'];
+    const D=['Topo da página. Gira devagar, reage ao cursor (±22° no eixo Y, ±9° no X), flutua 7px.','Ao rolar o topo, as fatias começam a se soltar e o objeto sobe e gira. Também usado na passagem 01→02 da seção de assinatura.','Na vitrine: pequeno, girando sem parar, quatro fatias dispersas em profundidade. Seção de assinatura, 50% do percurso.','Processo: as fatias se alinham numa vista explodida axonométrica — a ordem aparece antes da forma final.','Encerramento: as fatias se encaixam conforme o CTA entra na tela. Referência direta ao topo — fecha o ciclo.'];
+    return {
+      coverMark:this.cache.cover,
+      states:this.cache.states.map((el,i)=>({el,n:'0'+(i+1),t:T[i],d:D[i]})),
+      colors:[
+        {n:'Preto principal',h:'#04060A',v:'#04060A',u:'Fundo de toda a página'},
+        {n:'Preto secundário',h:'#080C14',v:'#080C14',u:'Molduras, vitrine, cartões técnicos'},
+        {n:'Superfície',h:'#0D1320',v:'#0D1320',u:'Cápsula de navegação, vidro'},
+        {n:'Branco quebrado',h:'#EEF1F5',v:'#EEF1F5',u:'Texto principal, botão em passagem'},
+        {n:'Branco',h:'#FFFFFF',v:'#FFFFFF',u:'Topo do gradiente prata'},
+        {n:'Prata',h:'#B9C1CE',v:'#B9C1CE',u:'Texto secundário, segundas linhas'},
+        {n:'Névoa',h:'#7D8697',v:'#7D8697',u:'Legendas e índices'},
+        {n:'Grafite metálico',h:'#6F7888',v:'#6F7888',u:'Base do gradiente prata'},
+        {n:'Aço escuro',h:'#1B2230',v:'#1B2230',u:'Faces traseiras do objeto 3D'},
+        {n:'Azul GR',h:'#3D6DFF',v:'#3D6DFF',u:'Única cor de ação: ícones, linhas de progresso'},
+        {n:'Azul gelo',h:'#AFC4FF',v:'#AFC4FF',u:'Destaques, foco, luz de recorte do 3D'},
+        {n:'Azul profundo',h:'#0A1C4A',v:'#0A1C4A',u:'Sombras coloridas, véu das fotos (#2448A8)'}
+      ],
+      typeScale:[
+        {n:'Display 1',ex:'TRANSFORMA',f:"800 72px/1 'Archivo',sans-serif",v:"'wdth' 106",ls:'-.045em',spec:'clamp(46px, 10.2vw, 206px) · 800 · larg. 106→78 · -4,5%'},
+        {n:'Display serif',ex:'visitante em cliente',f:"italic 400 64px/1 'Instrument Serif',serif",v:'normal',ls:'-.01em',spec:'clamp(42px, 7.4vw, 140px) · itálica · -1%'},
+        {n:'Título de seção',ex:'Quatro segmentos.',f:"700 52px/1 'Archivo',sans-serif",v:"'wdth' 92",ls:'-.04em',spec:'clamp(40px, 6.4vw, 112px) · 700 · larg. 92 · alt. 0,95'},
+        {n:'Título 2ª linha',ex:'Quatro linguagens.',f:"italic 400 54px/1 'Instrument Serif',serif",v:'normal',ls:'0',spec:'clamp(44px, 7vw, 124px) · itálica · prata'},
+        {n:'Manifesto',ex:'Ter um site não é o mesmo…',f:"300 40px/1.1 'Archivo',sans-serif",v:'normal',ls:'-.03em',spec:'clamp(34px, 4.8vw, 84px) · 300 · alt. 1,04'},
+        {n:'Título de etapa',ex:'Direção visual',f:"700 40px/1 'Archivo',sans-serif",v:"'wdth' 90",ls:'-.035em',spec:'clamp(40px, 4.4vw, 80px) · 700'},
+        {n:'Corpo',ex:'Estratégia, texto e design com um único objetivo.',f:"400 17px/1.6 'Archivo',sans-serif",v:'normal',ls:'0',spec:'15–17px · 400 · alt. 1,6 · máx. 440px'},
+        {n:'Botão / navegação',ex:'Falar com os sócios',f:"500 15px/1 'Archivo',sans-serif",v:'normal',ls:'.02em',spec:'13–16px · 500'},
+        {n:'Legenda',ex:'(02) CRIAÇÃO — VITRINE CONCEITUAL',f:"400 11px/1 'JetBrains Mono',monospace",v:'normal',ls:'.16em',spec:'10–12px · mono · caixa alta · +16%'}
+      ],
+      cols:Array.from({length:12},(_,i)=>i),
+      spacing:[
+        {n:'Entre seções',v:'clamp(100px, 14vh, 200px)',d:'Respiro vertical padrão. Seções fixadas (manifesto, processo, assinatura) usam altura de 340–560vh.'},
+        {n:'Título → conteúdo',v:'clamp(36px, 7vh, 80px)',d:'Distância entre o cabeçalho de seção e a peça principal.'},
+        {n:'Legenda → título',v:'22px',d:'Índice em mono sempre acima do título, alinhado à esquerda.'},
+        {n:'Escala base',v:'4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128',d:'Múltiplos de 4. Nada abaixo de 12px entre blocos de texto.'}
+      ],
+      motion:[
+        {s:'Topo',g:'Carregamento: linhas do título sobem da máscara em cascata (0 / 110 / 220ms). Rolagem: título perde largura e desliza para a esquerda.',t:'translateY 105%→0 · 1300ms · largura 106→78 · x 0→-7vw',m:'Mesma entrada; largura base 76; sem paralaxe de cursor.'},
+        {s:'Objeto 3D',g:'Cursor + tempo + rolagem. Flutua em seno lento; reflexo da face muda com a rotação.',t:'rotY ±22° · rotX ±9° · y ±7px · fatias até 0,5× o tamanho em profundidade',m:'Versão estática em imagem (render) com leve giro por giroscópio opcional.'},
+        {s:'Vitrine',g:'Clique na aba, setas ou troca automática a cada 8s (pausa com o cursor em cima).',t:'máscara lateral 1200ms · imagem escala 1,16→1 em 1800ms · texto +28px→0 com 350ms de atraso',m:'Moldura de celular; mesma máscara; troca por abas roláveis.'},
+        {s:'Manifesto',g:'Seção fixa por 340vh. 0–42%: palavras se afastam. 20–56%: letras de COMUM se fragmentam. 46–60%: pergunta surge. 56–100%: uma interface se desenha.',t:'x ±38vw · letras até 40vw/38vh e 50° · linhas scaleX 0→1 em cascata de 2,8%',m:'Mesma coreografia, tipos proporcionalmente maiores.'},
+        {s:'Processo',g:'Seção fixa por 560vh convertendo rolagem vertical em deslocamento horizontal.',t:'trilho x 0→-(largura-viewport) · barra de progresso scaleX · objeto: disperso→explodido',m:'Lista vertical; cada etapa revela ao entrar (translateY 36px, 1300ms).'},
+        {s:'Assinatura',g:'Seção fixa por 440vh percorrendo os cinco estados do objeto; lista destaca o estado atual.',t:'interpolação suave entre 5 quadros-chave · rotY -18→150→200→395→360',m:'340vh; objeto acima, lista abaixo, sem parágrafo.'},
+        {s:'Manifesto tipográfico',g:'Duas faixas enormes deslizam em sentidos opostos conforme a rolagem.',t:'x = (topo - altura da tela) × 0,4',m:'Mesmo efeito, corpo 56px.'},
+        {s:'Antes e depois',g:'Arraste ou teclado. Divisor com brilho azul.',t:'recorte inset(0 0 0 X%) em tempo real · alça escala 1,08 na passagem',m:'Moldura vertical 9:16 com versões de celular das duas páginas.'},
+        {s:'Encerramento',g:'Ao entrar na tela, as fatias se reencaixam; o objeto termina frontal.',t:'dispersão 1→0 entre 12% e 80% da entrada · rotY +80°→0',m:'Idem, objeto a 42% da largura; barra fixa de WhatsApp some.'}
+      ],
+      objSpec:[
+        {k:'Formato',v:'Monograma "GR" em Archivo 800, largura 112, extrudado em 11% do corpo e cortado em quatro fatias horizontais (0–32–50–68–100%).'},
+        {k:'Material',v:'Face frontal em prata escovada com reflexo anisotrópico; laterais em aço que escurece até #151B27; primeira camada com filete azul gelo.'},
+        {k:'Acabamento',v:'Rugosidade 0,25, metalicidade 1. Arestas com chanfro de 1% para pegar luz. Nada de brilho plástico.'},
+        {k:'Iluminação',v:'Chave fria lateral (esquerda, 5600K), recorte azul #AFC4FF por trás à direita, ambiente em mapa de estúdio escuro.'},
+        {k:'Reflexos',v:'Faixa de luz que atravessa a face conforme a rotação — o reflexo se move, não o objeto inteiro.'},
+        {k:'Sombra',v:'Elipse difusa no chão a 22% do corpo abaixo, preto 85%, desfoque 8px. Nunca sombra dura.'},
+        {k:'Escala',v:'Topo: 30% da largura (máx. 460px). Assinatura: 30% (máx. 480px). Encerramento: 20% (máx. 300px). Vitrine: 96px.'},
+        {k:'Enquadramento',v:'Topo: centro a 73% × 44%, sobreposto ao título. Assinatura: coluna direita. Encerramento: centralizado acima do título.'},
+        {k:'Fundo',v:'Sempre sobre o preto principal com halo radial azul (22–28%) e um feixe de luz diagonal desfocado.'},
+        {k:'Celular',v:'Render estático em alta resolução (WebP/AVIF com transparência) + giro leve por CSS. WebGL só se o dispositivo for capaz.'}
+      ],
+      resp:[
+        {e:'Navegação',d:'Cápsula central com 4 itens + botão de contato.',t:'Logo + botão Menu (tela cheia).',m:'Logo + Menu; barra fixa inferior de WhatsApp após o topo.'},
+        {e:'Título do topo',d:'Três linhas, "TRANSFORMA" a 10,2vw.',t:'Mesmo, largura base 92.',m:'Largura base 76 para caber; serifa ocupa a linha inteira.'},
+        {e:'Objeto 3D (topo)',d:'À direita, sobreposto ao título.',t:'À direita, 34% da largura.',m:'Centralizado no terço superior, 56% da largura.'},
+        {e:'Vitrine',d:'Moldura de navegador 16:9 com as páginas completas.',t:'Mesma moldura, abas roláveis.',m:'Moldura de celular 9:16 com versões móveis dos conceitos.'},
+        {e:'Manifesto',d:'Fixo, fragmentação completa.',t:'Idem.',m:'Idem; interface desenhada ocupa 88% da largura.'},
+        {e:'Processo',d:'Trilho horizontal fixo.',t:'Lista vertical.',m:'Lista vertical, numerais de 110px.'},
+        {e:'Assinatura',d:'Duas colunas.',t:'Duas colunas estreitas ou empilhadas.',m:'Objeto acima, estados abaixo, sem parágrafo.'},
+        {e:'Antes e depois',d:'Moldura 16:9.',t:'Moldura 16:9.',m:'Moldura 9:16, páginas redesenhadas para celular.'},
+        {e:'Cursor e ímã',d:'Ativos.',t:'Ativos com mouse; desligados no toque.',m:'Desligados.'}
+      ],
+      concepts:[
+        {seg:'IMOBILIÁRIA — MORADA NOVE',brand:'MORADA NOVE',f:"700 18px 'Archivo',sans-serif",img:U('1600596542815-ffad4c1539a9'),bg:'url("'+U('1600596542815-ffad4c1539a9')+'")',alt:'Residência conceitual',d:'Archivo condensada em caixa alta. Imagem em tela cheia, busca por bairro/tipologia em vidro, miniaturas de imóveis. Ação: agendar visita.'},
+        {seg:'CLÍNICA — LUME',brand:'lume',f:"italic 400 28px 'Instrument Serif',serif",img:U('1629909613654-28e377c37b09'),bg:'url("'+U('1629909613654-28e377c37b09')+'")',alt:'Clínica conceitual',d:'Único conceito claro (#EEF0F3). Serifa acolhedora, imagem com cantos suaves, três garantias de atendimento. Ação: agendar avaliação.'},
+        {seg:'ARQUITETURA — ATELIER TRAÇO',brand:'ATELIER TRAÇO',f:"500 14px 'Archivo',sans-serif",img:U('1487958449943-2429e8be8625'),bg:'url("'+U('1487958449943-2429e8be8625')+'")',alt:'Arquitetura conceitual',d:'Serifa gigante em escada, grade assimétrica de três imagens, índice de tipologias. Ação: iniciar um projeto.'},
+        {seg:'TURISMO — ROTA SERENA',brand:'Rota Serena',f:"italic 400 26px 'Instrument Serif',serif",img:U('1507525428034-b723cf961d3e'),bg:'url("'+U('1507525428034-b723cf961d3e')+'")',alt:'Turismo conceitual',d:'Composição centrada, itálica + sans larga espaçada, roteiros em vidro. Ação: desenhar minha viagem.'}
+      ],
+      assets:[
+        {n:'Logo GR One',d:'Monograma "GR" em Archivo 800/largura 112 com gradiente prata + "ONE" em mono espaçado. Versão vetorial final ainda a desenhar.',s:'CONCEITUAL',c:'#AFC4FF'},
+        {n:'Objeto 3D',d:'Protótipo em camadas CSS. Produção: modelo GLB (monograma extrudado, 4 fatias nomeadas) + render estático para celular.',s:'CONCEITUAL',c:'#AFC4FF'},
+        {n:'Fontes',d:'Archivo (variável), Instrument Serif, JetBrains Mono — todas Google Fonts, licença aberta. Servir localmente via next/font.',s:'DEFINITIVO',c:'#EEF1F5'},
+        {n:'Imagens dos conceitos',d:'Fotografias genéricas do Unsplash usadas como matéria-prima. Proporção livre: o layout recorta por object-fit, então qualquer substituta serve.',s:'CONCEITUAL',c:'#AFC4FF'},
+        {n:'Tratamento fotográfico',d:'Preto e branco + contraste + véu #2448A8 em modo cor 30–45%. Aplicar por CSS ou pré-processar.',s:'DEFINITIVO',c:'#EEF1F5'},
+        {n:'Ícones',d:'Apenas setas (diagonal, laterais, para baixo) e hambúrguer em traço de 1,2–1,4px. Nenhum ícone decorativo.',s:'DEFINITIVO',c:'#EEF1F5'},
+        {n:'Textura',d:'Granulação fractal em sobreposição a 6% sobre toda a página. Um único arquivo SVG.',s:'DEFINITIVO',c:'#EEF1F5'},
+        {n:'Número do WhatsApp',d:'Campo editável no painel de ajustes do protótipo. Domínio ainda não definido.',s:'PENDENTE',c:'#7D8697'}
+      ],
+      impl:[
+        {t:'Rolagem suave e sincronizada',d:'Lenis para a rolagem + GSAP ScrollTrigger para as seções fixadas. Todo efeito lê um único progresso 0–1 por seção.'},
+        {t:'Objeto 3D',d:'React Three Fiber carregando um GLB com 4 fatias nomeadas. Cada estado é um conjunto (dispersão, explosão, rotação) interpolado pelo progresso. Um único canvas fixo que muda de enquadramento por seção, ou instâncias por seção com o mesmo modelo.'},
+        {t:'Alternativa leve',d:'Detectar GPU fraca/economia de dados/celular: trocar o canvas por uma sequência de imagens pré-renderizadas (ou uma só) com as mesmas posições.'},
+        {t:'Tipografia variável',d:'Animar font-variation-settings (largura) e translate com o progresso do topo. Nunca animar font-size — evita recálculo de layout.'},
+        {t:'Máscaras da vitrine',d:'clip-path inset animado com a curva de transição; imagem interna escala em paralelo. Pré-carregar as quatro imagens principais.'},
+        {t:'Manifesto',d:'Letras em spans individuais; vetores de dispersão fixos (não aleatórios a cada carga) para a coreografia ser sempre a mesma.'},
+        {t:'Processo horizontal',d:'Trilho com translateX = progresso × (largura do trilho − largura da tela). Recalcular no redimensionamento.'},
+        {t:'Antes e depois',d:'Dois layouts sobrepostos; o de cima recebe clip-path inset(0 0 0 X%). Eventos de ponteiro com captura; role="slider" com teclado.'},
+        {t:'Cursor e ímã',d:'Só com (pointer: fine). Dois elementos fixos movidos por transform em requestAnimationFrame; rótulo via data-cursor.'}
+      ],
+      review:[
+        {q:'A GR One parece premium?',a:'Sim — paleta contida, muito espaço, tipografia com personalidade e um objeto de marca próprio. Nenhum clichê de agência.'},
+        {q:'A primeira tela causa impacto?',a:'Título ocupa a largura inteira, objeto metálico reage ao cursor e a entrada é orquestrada.'},
+        {q:'A experiência demonstra o produto?',a:'A vitrine mostra quatro landing pages completas e o antes e depois mostra a transformação — a própria página é a prova.'},
+        {q:'As animações têm propósito?',a:'Cada uma conta o método (desmontar → reorganizar → reconstruir) ou revela conteúdo. Nada gira por girar.'},
+        {q:'O 3D parece sofisticado?',a:'No protótipo, aproximação em CSS. A produção em WebGL com material físico é necessária para o nível final.'},
+        {q:'As quatro demonstrações diferem?',a:'Tipografia, layout, fundo e ação diferentes; mesmo tratamento fotográfico para manter a família.'},
+        {q:'Evita aparência de modelo pronto?',a:'Sem cartões em série, sem ícones decorativos, composições assimétricas e seções fixadas.'},
+        {q:'Impacto e espaço estão equilibrados?',a:'Momentos de silêncio (condições, encerramento) alternam com picos (topo, manifesto, assinatura).'},
+        {q:'Continua premium no celular?',a:'Composições redesenhadas, não reduzidas; barra fixa de WhatsApp; efeitos pesados substituídos.'},
+        {q:'Gera valor sem números inventados?',a:'Apoia-se em processo claro, condições explícitas (50/50, 3 revisões, sob consulta) e atendimento direto dos sócios.'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

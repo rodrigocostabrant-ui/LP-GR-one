@@ -1,0 +1,71 @@
+"use client";
+
+import { site } from "@/content/site";
+import Reveal from "@/components/ui/Reveal";
+
+export default function Condicoes() {
+  const { condicoes } = site;
+  return (
+    <section style={{ position: "relative", padding: "clamp(100px,14vh,180px) var(--m)", background: "linear-gradient(180deg, var(--bg), #060A12)" }}>
+      <div style={{ maxWidth: 1560, margin: "0 auto", display: "flex", flexDirection: "column", gap: "clamp(56px,9vh,100px)" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: 28 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+            <Reveal variant="fade">
+              <span style={{ font: "400 11px/1 var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--mute)" }}>
+                {condicoes.eyebrow}
+              </span>
+            </Reveal>
+            <h2 style={{ margin: 0, display: "flex", flexDirection: "column" }}>
+              <span style={{ overflow: "hidden" }}>
+                <Reveal variant="mask">
+                  <span style={{ display: "block", font: "700 clamp(38px,5.4vw,96px)/.95 var(--font-sans)", fontVariationSettings: "'wdth' 92", letterSpacing: "-.04em" }}>
+                    {condicoes.tituloLinha1}
+                  </span>
+                </Reveal>
+              </span>
+              <span style={{ overflow: "hidden" }}>
+                <Reveal variant="mask" delay={100}>
+                  <span style={{ display: "block", font: "italic 400 clamp(42px,6vw,106px)/1 var(--font-serif)", color: "var(--silver)" }}>
+                    {condicoes.tituloItalico}
+                  </span>
+                </Reveal>
+              </span>
+            </h2>
+          </div>
+          <Reveal style={{ maxWidth: 380 }}>
+            <p style={{ margin: 0, font: "400 15px/1.6 var(--font-sans)", color: "var(--mute)" }}>{condicoes.paragrafo}</p>
+          </Reveal>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%,300px), 1fr))", gap: "clamp(40px,4vw,72px)" }}>
+          {condicoes.itens.map((item, i) => (
+            <Reveal key={item.eyebrow} delay={i * 100}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 18, paddingTop: 24, borderTop: "1px solid rgba(214,222,235,.14)" }}>
+                <span style={{ font: "400 10px/1 var(--font-mono)", letterSpacing: ".18em", textTransform: "uppercase", color: "var(--ice)" }}>
+                  {item.eyebrow}
+                </span>
+                <span
+                  style={{
+                    font:
+                      item.eyebrow === "Investimento"
+                        ? "italic 400 clamp(64px,7vw,124px)/.9 var(--font-serif)"
+                        : "200 clamp(72px,8vw,140px)/.85 var(--font-sans)",
+                    fontVariationSettings: item.eyebrow === "Investimento" ? undefined : "'wdth' 80",
+                    letterSpacing: item.eyebrow === "Investimento" ? undefined : "-.05em",
+                    color: item.eyebrow === "Investimento" ? "var(--ink)" : "transparent",
+                    background: item.eyebrow === "Investimento" ? undefined : "linear-gradient(180deg,#FFFFFF,#8E97A6)",
+                    WebkitBackgroundClip: item.eyebrow === "Investimento" ? undefined : "text",
+                    backgroundClip: item.eyebrow === "Investimento" ? undefined : "text",
+                  }}
+                >
+                  {item.valor}
+                </span>
+                <p style={{ margin: 0, maxWidth: 300, font: "400 15px/1.6 var(--font-sans)", color: "var(--silver)" }}>{item.descricao}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
