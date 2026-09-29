@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { site } from "@/content/site";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
+import InstagramButton from "@/components/ui/InstagramButton";
 import GRMark, { type MarkState } from "@/components/three/GRMark";
 import { motionState } from "@/lib/motion/engine";
 import { useScrollProgress, useTick } from "@/lib/motion/hooks";
@@ -104,10 +105,14 @@ export default function Contato() {
         </span>
       </h2>
 
-      <Reveal delay={200} style={{ position: "relative", zIndex: 3 }}>
+      <Reveal
+        delay={200}
+        style={{ position: "relative", zIndex: 3, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: 14 }}
+      >
         <MagneticButton href={wa} style={{ height: 64, gap: 18, padding: "0 10px 0 30px", fontSize: 16, borderColor: "rgba(214,222,235,.4)" }}>
           {contato.cta}
         </MagneticButton>
+        <InstagramButton href={site.instagram} label={`Instagram da GR One (${site.instagramHandle})`} />
       </Reveal>
 
       <Reveal variant="fade" delay={300} style={{ position: "relative", zIndex: 3 }}>

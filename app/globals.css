@@ -204,6 +204,85 @@ body::after {
     border-color: transparent;
   }
 }
+
+/* Botão circular do Instagram (InstagramButton.tsx): mesmo vidro do .gr-btn,
+   anel prata/azul que gira na passagem e preenchimento prata do centro. */
+.gr-ig {
+  --ig-from: var(--silver);
+  --ig-to: var(--ice);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(214, 222, 235, 0.4);
+  background:
+    radial-gradient(circle closest-side, var(--ink) 98%, transparent) no-repeat center / 0% 0%,
+    linear-gradient(135deg, rgba(61, 109, 255, 0.35), rgba(255, 255, 255, 0.03));
+  isolation: isolate;
+  transition:
+    background-size 0.65s var(--ease-transicao),
+    border-color 0.4s,
+    transform 0.16s var(--ease-entrada),
+    translate 0.3s var(--ease-entrada);
+}
+.gr-ig__ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(from 0deg, transparent 0 30%, var(--ice) 55%, var(--blue) 75%, transparent 90%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.gr-ig__glyph {
+  position: relative;
+  transition:
+    translate 0.3s var(--ease-entrada),
+    scale 0.65s var(--ease-transicao);
+}
+.gr-ig__glyph stop {
+  transition: stop-color 0.4s;
+}
+.gr-ig__lens {
+  fill: var(--ice);
+  transition: fill 0.4s;
+}
+.gr-ig:active {
+  transform: scale(0.94);
+}
+@media (hover: hover) and (pointer: fine) {
+  .gr-ig:hover {
+    --ig-from: var(--deep);
+    --ig-to: var(--blue);
+    background-size: 100% 100%, 100% 100%;
+    border-color: var(--ink);
+  }
+  .gr-ig:hover .gr-ig__ring {
+    opacity: 1;
+    animation: gr-ig-spin 2.4s linear infinite;
+  }
+  .gr-ig:hover .gr-ig__glyph {
+    scale: 1.08;
+  }
+  .gr-ig:hover .gr-ig__lens {
+    fill: var(--blue);
+  }
+}
+@keyframes gr-ig-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gr-ig:hover .gr-ig__ring {
+    animation: none;
+  }
+}
 }
 
 /* ── Topo ──────────────────────────────────────────────────────────────── */

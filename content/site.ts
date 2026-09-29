@@ -7,6 +7,8 @@ export const site = {
   // TODO: número real do WhatsApp dos sócios (formato internacional, ex: 5511999999999)
   whatsapp: "5500000000000",
   whatsappMensagem: "Olá! Quero conversar sobre uma landing page para a minha empresa.",
+  instagram: "https://www.instagram.com/grone.lab/",
+  instagramHandle: "@grone.lab",
   socios: "Rodrigo e Gustavo",
   /** CTA curto: cabeçalho, topo e barra fixa do celular */
   ctaCurto: "Começar uma conversa",
